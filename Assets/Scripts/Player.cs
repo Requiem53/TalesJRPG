@@ -4,52 +4,76 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //Properties
+    [SerializeField] private GameObject motherMovePoint;
+    [SerializeField] private GameObject parentMovePoint;
 
-    public Rigidbody2D rb;
-    public float speed = 20;
-
-    [SerializeField] private Vector2 moveDirection;
+    [SerializeField] private Transform movePoint;
+    [SerializeField] private float speed = 6;
+    [SerializeField] private LayerMask groundObstacle;
     private Movement movement = new Movement();
+    private Movee playerMovee;
 
-    // Start is called before the first frame update
-    void Start()
+    //System Stuff
+    private Movement.MovementAxis axis;
+    
+    //Debugging
+    [SerializeField] private Vector2 moveDirection;
+    
+
+    void Awake()
     {
-        movement.printHello(rb);
+       InstantiateMovePoint();
+       SetUpPlayerMovee();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ProcessInputs();
     }
 
     void FixedUpdate(){
-         movement.move(rb,speed,moveDirection);
+        UnOverrideDirection();
+        movement.move(playerMovee, moveDirection);
     }
 
-   void ProcessInputs(){
+    void InstantiateMovePoint(){
+        var mcMovePoint = (GameObject) Instantiate(motherMovePoint,transform.position,Quaternion.identity, parentMovePoint.transform);
+        mcMovePoint.name = "Player MovePoint";
+        movePoint = mcMovePoint.transform;
+    }
+    
+    void SetUpPlayerMovee(){
+        playerMovee = new Movee(movePoint,transform,speed,groundObstacle);
+    }
+
+       void ProcessInputs(){
          float moveX = Input.GetAxisRaw("Horizontal");
          float moveY = Input.GetAxisRaw("Vertical");
 
-        moveDirection = new Vector2(moveX, moveY);  
-        if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.y))
+        moveDirection = new Vector2(moveX, moveY); 
+
+        //Anti-input override
+        if (Input.GetButtonDown("Horizontal")) axis = Movement.MovementAxis.Horizontal;
+        if (Input.GetButtonDown("Vertical")) axis = Movement.MovementAxis.Vertical;
+
+        if (Input.GetButtonUp("Horizontal") && Input.GetButton("Vertical")) axis = Movement.MovementAxis.Vertical;
+        if (Input.GetButtonUp("Vertical") && Input.GetButton("Horizontal")) axis = Movement.MovementAxis.Horizontal;
+        
+    }
+
+    public void UnOverrideDirection(){
+        switch (axis)
         {
-            moveDirection.y = 0;
-        }
-        else
-        {
-            moveDirection.x = 0;
+            case Movement.MovementAxis.Horizontal:
+                moveDirection.y = 0;
+                break;
+            case Movement.MovementAxis.Vertical:
+                moveDirection.x = 0;
+                break;
         }
     }
 
 }
 
-        //if(moveDirection.x != 0){
-        //   movement.moveHorizontal(rb,moveDirection.x * speed);
-        // }else if(moveDirection.y != 0){
-        // movement.moveVertical(rb,moveDirection.y * speed);
-        // }
-        // else{
-        //     movement.moveStop(rb);
-        // }
-        
+

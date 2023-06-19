@@ -2,40 +2,63 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class Movee 
+{
+    public Transform movePoint;
+    public Transform transform;
+    public float speed;
+    public LayerMask obstacle;
+
+    public Movee(Transform movePoint, Transform transform, float speed, LayerMask obstacle){
+        this.movePoint = movePoint;
+        this.transform = transform;
+        this.speed = speed;
+        this.obstacle = obstacle;
+    }
+}
+
+
 public class Movement
 {
-    public void move(Rigidbody2D rb, float speed, Vector2 moveDirection){
-        rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
-        if(rb.velocity.x > 0 || rb.velocity.y > 0){
-        Debug.Log("X: " +  rb.velocity.x);
-        Debug.Log("Y: " +  rb.velocity.x);
+    public void move(Movee movee, Vector2 moveDirection){
+
+        movee.transform.position = Vector3.MoveTowards(movee.transform.position, movee.movePoint.position, movee.speed * Time.deltaTime);
+
+        if(Vector3.Distance(movee.transform.position, movee.movePoint.position) <= 0.05f){
+
+            if(!Physics2D.OverlapCircle(movee.movePoint.position + new Vector3(moveDirection.x, 0f, 0f), .2f, movee.obstacle)){
+
+                if(Mathf.Abs(moveDirection.x) == 1f){
+                    movee.movePoint.position += new Vector3(moveDirection.x, 0f, 0f);
+                }
+
+            }
+
+            if(!Physics2D.OverlapCircle(movee.movePoint.position + new Vector3(0f, moveDirection.y, 0f), .2f, movee.obstacle)){
+                if(Mathf.Abs(moveDirection.y) == 1f){
+                    movee.movePoint.position += new Vector3(0f, moveDirection.y, 0f);
+                }
+            }
         }
     }
 
-    public void moveHorizontal(Rigidbody2D rb, float speed){
-        rb.velocity = new Vector2(speed, 0.0f);
+    public void stop(float duration){
+        if(duration > 0){
+            duration -= Time.deltaTime;
+        }
     }
 
-    public void moveVertical(Rigidbody2D rb, float speed){
-        rb.velocity = new Vector2(0.0f, speed);
+    public enum MovementAxis
+    {
+        Vertical,
+        Horizontal
     }
-
-    public void moveStop(Rigidbody2D rb){
-        rb.velocity = new Vector2(0.0f, 0.0f);
-    }
-
-
-
-    public void printHello(Rigidbody2D rb){
-        Debug.Log("Miss me with that BS");
-    }
-
-    // private float speed;
-    // private Rigidbody2D rb;
-
-    // public Movement(Rigidbody2D rb,float speed){
-    //     this.rb = rb;
-    //     this.speed = speed;
-    // }
 }
+
+//USELESS FOR NOW
+// public abstract class MoveeSetter{
+//     public abstract void InstantiateMovePoint();
+//     public abstract void SetUpUnitMovee();
+
+// }
 
