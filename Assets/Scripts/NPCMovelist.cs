@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCMovement : Movement
+public class NPCMovelist : Movement
 {
 
    public void moveLeft(Movee movee, int steps){

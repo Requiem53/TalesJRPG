@@ -42,6 +42,7 @@ public class Movement
         }
     }
 
+    //?? To change
     public void stop(float duration){
         if(duration > 0){
             duration -= Time.deltaTime;
@@ -54,11 +55,4 @@ public class Movement
         Horizontal
     }
 }
-
-//USELESS FOR NOW
-// public abstract class MoveeSetter{
-//     public abstract void InstantiateMovePoint();
-//     public abstract void SetUpUnitMovee();
-
-// }
 

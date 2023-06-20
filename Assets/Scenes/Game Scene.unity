@@ -1102,7 +1102,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1238386974}
   - component: {fileID: 1238386973}
-  - component: {fileID: 1238386975}
+  - component: {fileID: 1238386978}
+  - component: {fileID: 1238386979}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1177,7 +1178,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1238386975
+--- !u!114 &1238386978
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1186,17 +1187,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 1238386972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79e3080881aec843bcf6ec0607bf072, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d7404a745cb59f438e84d5ae4833d9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1238386979}
+  moveDirection: {x: 0, y: 0}
+--- !u!114 &1238386979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238386972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd84ab317f78bf744b7743ca08330004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   motherMovePoint: {fileID: 280133543}
   parentMovePoint: {fileID: 1465230113}
   movePoint: {fileID: 0}
   speed: 6
-  groundObstacle:
+  obstacle:
     serializedVersion: 2
     m_Bits: 1024
-  moveDirection: {x: 0, y: 0}
 --- !u!1 &1465230113
 GameObject:
   m_ObjectHideFlags: 0
