@@ -2,7 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class MotherMovePointReference : MonoBehaviour
 {
-   private int speed;
+   [SerializeField] private GameObject motherMovePoint;
+   [SerializeField] private GameObject parentMovePoint;
+
+   public GameObject MotherMovePoint{
+        get{return motherMovePoint;}
+        set{motherMovePoint = value;}
+    }
+
+    public GameObject ParentMovePoint{
+        get{return parentMovePoint;}
+        set{parentMovePoint = value;}
+    }
 }

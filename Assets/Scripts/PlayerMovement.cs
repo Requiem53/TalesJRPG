@@ -7,33 +7,41 @@ public class PlayerMovement : MonoBehaviour
     //System Stuff
     private Movement movement = new Movement();
     private Movement.MovementAxis axis;
-    [SerializeField] private Player player;
+    [SerializeField] private PlayerMove playerMove;
     
     //Debugging
     [SerializeField] private Vector2 moveDirection;
-    
+    [SerializeField] private float debugSpeed;
 
-    void Start()
+    private void OnEnable(){
+        MoveeProperties.speedChanged += SpeedChange;
+    }
+
+    private void OnDisable(){
+        MoveeProperties.speedChanged -= SpeedChange;
+    }
+
+    private void Start()
     {
         PlayerInitialization();
     }
 
-    void Update()
+    private void Update()
     {
-        ProcessInputs();
-        
+        PlayerMove.DebugSpeedChange(playerMove, debugSpeed);
+        ProcessInputs();   
     }
 
-    void FixedUpdate(){
-        movement.move(player.UnitMovee, moveDirection);
+    private void FixedUpdate(){
+        movement.move(playerMove.UnitMovee, moveDirection);
     }
 
-    void PlayerInitialization(){
-        player.InstantiateMovePoint(player);
-        player.SetUpUnitMovee(player);
+    private void PlayerInitialization(){
+        playerMove.InstantiateMovePoint(playerMove);
+        PlayerMove.SetUpUnitMovee(playerMove);
     }
 
-    void ProcessInputs(){ 
+    private void ProcessInputs(){ 
          float moveX = Input.GetAxisRaw("Horizontal");
          float moveY = Input.GetAxisRaw("Vertical");
 
@@ -49,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         UnOverrideDirection();
     }
 
-    public void UnOverrideDirection(){
+    private void UnOverrideDirection(){
         switch (axis)
         {
             case Movement.MovementAxis.Horizontal:
@@ -59,6 +67,10 @@ public class PlayerMovement : MonoBehaviour
                 moveDirection.x = 0;
                 break;
         }
+    }
+
+    private void SpeedChange(){
+        playerMove.UnitMovee.speed = playerMove.Speed;
     }
 
 }

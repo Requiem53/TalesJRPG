@@ -1102,8 +1102,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1238386974}
   - component: {fileID: 1238386973}
-  - component: {fileID: 1238386978}
   - component: {fileID: 1238386979}
+  - component: {fileID: 1238386978}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1190,8 +1190,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7404a745cb59f438e84d5ae4833d9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1238386979}
+  playerMove: {fileID: 1238386979}
   moveDirection: {x: 0, y: 0}
+  debugSpeed: 6
 --- !u!114 &1238386979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1204,9 +1205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd84ab317f78bf744b7743ca08330004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  motherMovePoint: {fileID: 280133543}
-  parentMovePoint: {fileID: 1465230113}
-  movePoint: {fileID: 0}
   speed: 6
   obstacle:
     serializedVersion: 2
@@ -1220,6 +1218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1465230114}
+  - component: {fileID: 1465230115}
   m_Layer: 0
   m_Name: Move Points
   m_TagString: Untagged
@@ -1240,9 +1239,24 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1589922814}
+  - {fileID: 1911214661}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1465230115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465230113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be8a43f8c2b610449ec29124746476a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  motherMovePoint: {fileID: 280133543}
+  parentMovePoint: {fileID: 1465230113}
 --- !u!1 &1508568462
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,6 +1554,52 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.00000023841858}
   serializedVersion: 2
   m_Radius: 0.49999997
+--- !u!1 &1911214660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1911214661}
+  - component: {fileID: 1911214662}
+  m_Layer: 0
+  m_Name: movePointReference
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1911214661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911214660}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1465230114}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1911214662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911214660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5eea5783ae2f846881bb23627ac569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  motherMovePoint: {fileID: 280133543}
+  parentMovePoint: {fileID: 1465230113}
 --- !u!1 &2094161423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,14 +1610,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2094161426}
   - component: {fileID: 2094161425}
-  - component: {fileID: 2094161427}
   m_Layer: 10
   m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &2094161425
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1625,23 +1684,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2094161427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2094161423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4edde0c6714a4b244b292609bcbdd901, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  motherMovePoint: {fileID: 280133543}
-  parentMovePoint: {fileID: 1465230113}
-  movePoint: {fileID: 0}
-  speed: 6
-  groundObstacle:
-    serializedVersion: 2
-    m_Bits: 0
-  rb: {fileID: 0}
