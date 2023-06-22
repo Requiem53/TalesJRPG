@@ -1103,7 +1103,8 @@ GameObject:
   - component: {fileID: 1238386974}
   - component: {fileID: 1238386973}
   - component: {fileID: 1238386979}
-  - component: {fileID: 1238386978}
+  - component: {fileID: 1238386980}
+  - component: {fileID: 1238386981}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1178,21 +1179,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1238386978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1238386972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d7404a745cb59f438e84d5ae4833d9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerMove: {fileID: 1238386979}
-  moveDirection: {x: 0, y: 0}
-  debugSpeed: 6
 --- !u!114 &1238386979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1205,10 +1191,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd84ab317f78bf744b7743ca08330004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
-  obstacle:
+  _speed: 6
+  _obstacle:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &1238386980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238386972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7404a745cb59f438e84d5ae4833d9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDirection: {x: 0, y: 0}
+  debugSpeed: 0
+--- !u!114 &1238386981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238386972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bae7c191dd8e2bf43b57d64e0370f609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMoveReference: {fileID: 1238386979}
 --- !u!1 &1465230113
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,7 +1576,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1911214661}
-  - component: {fileID: 1911214662}
   m_Layer: 0
   m_Name: movePointReference
   m_TagString: Untagged
@@ -1586,20 +1598,6 @@ Transform:
   m_Father: {fileID: 1465230114}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1911214662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1911214660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab5eea5783ae2f846881bb23627ac569, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  motherMovePoint: {fileID: 280133543}
-  parentMovePoint: {fileID: 1465230113}
 --- !u!1 &2094161423
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,27 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movee 
-{
-    public Transform movePoint;
-    public Transform transform;
-    public float speed;
-    public LayerMask obstacle;
-
-    public Movee(Transform movePoint, Transform transform, float speed, LayerMask obstacle){
-        this.movePoint = movePoint;
-        this.transform = transform;
-        this.speed = speed;
-        this.obstacle = obstacle;
-    }
-}
-
-
 public class Movement
 {
+    //First, always moves object to move point before queueing another movement.
+    //Then, stops once object arrives to move point.
+    //After that, checks if object really is inside the move point.
+    //Then does another check if there is an obstacle to the direction we move.
+    //Then applies movement depending on the direction
     public void move(Movee movee, Vector2 moveDirection){
 
-        movee.transform.position = Vector3.MoveTowards(movee.transform.position, movee.movePoint.position, movee.speed * Time.deltaTime);
+        MovementStatics.MoveTowardsMovePoint(movee);
 
         if(Vector3.Distance(movee.transform.position, movee.movePoint.position) <= 0.05f){
 
@@ -33,7 +22,6 @@ public class Movement
                 }
 
             }
-
             if(!Physics2D.OverlapCircle(movee.movePoint.position + new Vector3(0f, moveDirection.y, 0f), .2f, movee.obstacle)){
                 if(Mathf.Abs(moveDirection.y) == 1f){
                     movee.movePoint.position += new Vector3(0f, moveDirection.y, 0f);
@@ -49,10 +37,6 @@ public class Movement
         }
     }
 
-    public enum MovementAxis
-    {
-        Vertical,
-        Horizontal
-    }
+
 }
 
