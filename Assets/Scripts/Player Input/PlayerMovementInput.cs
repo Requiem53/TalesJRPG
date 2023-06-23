@@ -6,21 +6,19 @@ using UnityEngine;
 public class PlayerMovementInput : MonoBehaviour
 {
     //Contains Input for Movement and Player Initialization
+    //This is so fundamentally flawed
 
     //System Stuff
-    private PlayerMoveeProperties playerMoveeProperties;
-
-    public static event Action<PlayerMovementInput> OnPlayerMovementInputCreation;
+    [SerializeField]private PlayerMoveeProperties playerMoveeProperties;
     
-
     private void OnEnable(){
         //Detects Speed Change but does not work with inspector
         //Detects Movement and Adjusts Directions
-        MoveeProperties.SpeedChanged += SpeedChange;
+        MoveeProperties.OnSpeedChange += UpdateSpeed;
     }
 
     private void OnDisable(){
-        MoveeProperties.SpeedChanged -= SpeedChange;
+        MoveeProperties.OnSpeedChange -= UpdateSpeed;
     }
 
     private void Start()
@@ -30,9 +28,8 @@ public class PlayerMovementInput : MonoBehaviour
 
     private void Update()
     {
-        SpeedChange();
+        //UpdateSpeed();
         ProcessInputs();  
-        Debug.Log("Input read from: " + gameObject.name);
     }
 
     private void FixedUpdate(){
@@ -43,7 +40,6 @@ public class PlayerMovementInput : MonoBehaviour
     //Then, instantiates the move points and their references.
     //Then, sets up Movee based on Movee Properties.
     private void PlayerInitializing(){
-        OnPlayerMovementInputCreation?.Invoke(this);
         playerMoveeProperties.InstantiateMovePoint(playerMoveeProperties);
         playerMoveeProperties.SetUpUnitMovee(playerMoveeProperties);
     }
@@ -74,7 +70,7 @@ public class PlayerMovementInput : MonoBehaviour
     }
 
     //Used for changing speed. Currently also in Update.
-    private void SpeedChange(){
+    private void UpdateSpeed(){
         playerMoveeProperties.UnitMovee.speed = playerMoveeProperties.Speed;
     }
 

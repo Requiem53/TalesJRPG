@@ -47,7 +47,8 @@ public class MovementStatics
             direction = FaceDirection.South;
         }
     }
-
+    
+    //Makes object move towards Move Point
     public static void MoveTowardsMovePoint(Movee movee){
         movee.transform.position = Vector3.MoveTowards(movee.transform.position, movee.movePoint.position, movee.speed * Time.deltaTime);
     }

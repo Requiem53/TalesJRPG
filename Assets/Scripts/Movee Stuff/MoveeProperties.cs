@@ -56,7 +56,7 @@ public abstract class MoveeProperties : MonoBehaviour
 
     //Used to update the Axis, Face Direction, and MoveDirection of a Movee
     private void UpdateDirections(){
-         Movement.UpdateDirections(Axis, ref FaceDirection, ref MoveDirection);
+        Movement.UpdateDirections(Axis, ref FaceDirection, ref MoveDirection);
     }
 
     public GameObject MotherMovePoint{
@@ -81,27 +81,32 @@ public abstract class MoveeProperties : MonoBehaviour
 
     //Does not work on editor with Unity :(
     //Invokes don't call with setter methods when settings values in Inspector
-    public static event Action SpeedChanged;
+    public static event Action OnSpeedChange;
 
     public float Speed{
         get{return _speed;}
         set{
             UnitMovee.speed = value;
-            SpeedChanged?.Invoke();
+            OnSpeedChange?.Invoke();
         }
     }
 
     public LayerMask Obstacle{
         get{return _obstacle;}
-        set{UnitMovee.obstacle = value;}
+        set{UnitMovee.obstacle = value;
+                                }
     }
 
     public ref MovementStatics.FaceDirection FaceDirection{
         get{return ref faceDirection;}
     }
+
+    public static event Action OnAxisChange;
     public MovementStatics.MovementAxis Axis{
         get{return axis;}
-        set{axis = value;}
+        set{
+            axis = value;
+            OnAxisChange?.Invoke();}
     } 
 
     public ref Vector2 MoveDirection{
