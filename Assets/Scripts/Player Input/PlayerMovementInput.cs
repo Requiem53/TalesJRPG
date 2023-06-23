@@ -7,25 +7,20 @@ public class PlayerMovementInput : MonoBehaviour
 {
     //Contains Input for Movement and Player Initialization
 
-    //Debugging
-    //Serialize if you want to debug
-    [SerializeField] private MovementStatics.FaceDirection faceDirection;
-    private MovementStatics.MovementAxis axis;
-    private Vector2 moveDirection;
-
     //System Stuff
     private PlayerMoveeProperties playerMoveeProperties;
-    private Movement movement = new Movement();  
 
     public static event Action<PlayerMovementInput> OnPlayerMovementInputCreation;
+    
 
     private void OnEnable(){
         //Detects Speed Change but does not work with inspector
-        MoveeProperties.speedChanged += SpeedChange;
+        //Detects Movement and Adjusts Directions
+        MoveeProperties.SpeedChanged += SpeedChange;
     }
 
     private void OnDisable(){
-        MoveeProperties.speedChanged -= SpeedChange;
+        MoveeProperties.SpeedChanged -= SpeedChange;
     }
 
     private void Start()
@@ -37,6 +32,7 @@ public class PlayerMovementInput : MonoBehaviour
     {
         SpeedChange();
         ProcessInputs();  
+        Debug.Log("Input read from: " + gameObject.name);
     }
 
     private void FixedUpdate(){
@@ -49,7 +45,7 @@ public class PlayerMovementInput : MonoBehaviour
     private void PlayerInitializing(){
         OnPlayerMovementInputCreation?.Invoke(this);
         playerMoveeProperties.InstantiateMovePoint(playerMoveeProperties);
-        PlayerMoveeProperties.SetUpUnitMovee(playerMoveeProperties);
+        playerMoveeProperties.SetUpUnitMovee(playerMoveeProperties);
     }
     
     //Guess what this is for..
@@ -57,28 +53,24 @@ public class PlayerMovementInput : MonoBehaviour
          float moveX = Input.GetAxisRaw("Horizontal");
          float moveY = Input.GetAxisRaw("Vertical");
 
-        moveDirection = new Vector2(moveX, moveY); 
+        playerMoveeProperties.MoveDirection = new Vector2(moveX, moveY); 
 
         InputOverride();
-
-        MovementStatics.UnOverrideDirection(axis, ref moveDirection);
-        MovementStatics.FacingDirection(ref faceDirection, ref moveDirection);
     }
 
     //Makes it so if the Player inputs another movement, it changes to that.
     //Overriding the previous direction with the new direction.
     private void InputOverride(){
-        if (Input.GetButtonDown("Horizontal")) axis = MovementStatics.MovementAxis.Horizontal;
-        if (Input.GetButtonDown("Vertical")) axis = MovementStatics.MovementAxis.Vertical;
+        if (Input.GetButtonDown("Horizontal")) playerMoveeProperties.Axis = MovementStatics.MovementAxis.Horizontal;
+        if (Input.GetButtonDown("Vertical")) playerMoveeProperties.Axis = MovementStatics.MovementAxis.Vertical;
 
-        if (Input.GetButtonUp("Horizontal") && Input.GetButton("Vertical")) axis = MovementStatics.MovementAxis.Vertical;
-        if (Input.GetButtonUp("Vertical") && Input.GetButton("Horizontal")) axis = MovementStatics.MovementAxis.Horizontal;
-        
+        if (Input.GetButtonUp("Horizontal") && Input.GetButton("Vertical")) playerMoveeProperties.Axis = MovementStatics.MovementAxis.Vertical;
+        if (Input.GetButtonUp("Vertical") && Input.GetButton("Horizontal")) playerMoveeProperties.Axis = MovementStatics.MovementAxis.Horizontal;
     }
 
     //Hands over Player Movee and Move Direction to manipulate movement in Movement.cs
     private void PlayerMoving(){
-        movement.move(playerMoveeProperties.UnitMovee, moveDirection);
+        Movement.Move(playerMoveeProperties.UnitMovee, playerMoveeProperties.MoveDirection);
     }
 
     //Used for changing speed. Currently also in Update.

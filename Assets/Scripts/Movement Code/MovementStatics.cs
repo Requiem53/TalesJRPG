@@ -20,7 +20,7 @@ public class MovementStatics
     }
 
     //Handles Movement so it can only ever be four directions
-    public static void UnOverrideDirection(MovementAxis axis, ref Vector2 moveDirection){
+    public static void AxisLocker(MovementAxis axis, ref Vector2 moveDirection){
         switch (axis)
         {
             case MovementAxis.Horizontal:

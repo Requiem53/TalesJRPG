@@ -6,10 +6,14 @@ using UnityEngine;
 
 public abstract class MoveeProperties : MonoBehaviour
 {
-    private Movee unitMovee;
-    
+    //Serialize if you want to debug
+    [SerializeField] private MovementStatics.FaceDirection faceDirection;
+    private MovementStatics.MovementAxis axis;
     [SerializeField] private float _speed = 6;
     [SerializeField] private LayerMask _obstacle;
+    private Vector2 moveDirection;
+
+    private Movee unitMovee;
 
     private Transform _movePoint;
 
@@ -17,6 +21,15 @@ public abstract class MoveeProperties : MonoBehaviour
     private GameObject _parentMovePoint;
     
     public static event Action<MoveeProperties> OnMoveePropsCreation;
+
+    private void OnEnable(){
+        Movement.OnObjectMove += UpdateDirections;
+    }
+
+    private void OnDisable(){
+        Movement.OnObjectMove -= UpdateDirections;
+    }
+
 
     //Gets Mother and Parent Move Point reference from AssignMotherMoveToMovee.cs
     //Mother Move Point serves as the main prefab which all Move Points come from
@@ -28,7 +41,7 @@ public abstract class MoveeProperties : MonoBehaviour
 
     //Assigns Movee Property values to a Movee Variable.
     //Movee Properties below the class
-    public static void SetUpUnitMovee(MoveeProperties unit){
+    public void SetUpUnitMovee(MoveeProperties unit){
         Debug.Log("I wonder what'm gnna screw up this time");
         unit.UnitMovee = new Movee(unit.MovePoint,unit.transform,unit._speed,unit._obstacle);
     }
@@ -36,9 +49,14 @@ public abstract class MoveeProperties : MonoBehaviour
     //Assigns Mother and Parent Move Point to an object.
     public virtual void InstantiateMovePoint(MoveeProperties unit){
         SetUpMotherMovePointReference(unit);
-        var objectMovePoint = (GameObject) Instantiate(unit.MotherMovePoint,transform.position,Quaternion.identity, unit.ParentMovePoint.transform);
+        var objectMovePoint = (GameObject) Instantiate(unit.MotherMovePoint,unit.transform.position,Quaternion.identity, unit.ParentMovePoint.transform);
         objectMovePoint.name = "Object MovePoint";
         unit.MovePoint = objectMovePoint.transform;
+    }
+
+    //Used to update the Axis, Face Direction, and MoveDirection of a Movee
+    private void UpdateDirections(){
+         Movement.UpdateDirections(Axis, ref FaceDirection, ref MoveDirection);
     }
 
     public GameObject MotherMovePoint{
@@ -63,13 +81,13 @@ public abstract class MoveeProperties : MonoBehaviour
 
     //Does not work on editor with Unity :(
     //Invokes don't call with setter methods when settings values in Inspector
-    public static event Action speedChanged;
+    public static event Action SpeedChanged;
 
     public float Speed{
         get{return _speed;}
         set{
             UnitMovee.speed = value;
-            speedChanged?.Invoke();
+            SpeedChanged?.Invoke();
         }
     }
 
@@ -78,6 +96,17 @@ public abstract class MoveeProperties : MonoBehaviour
         set{UnitMovee.obstacle = value;}
     }
 
+    public ref MovementStatics.FaceDirection FaceDirection{
+        get{return ref faceDirection;}
+    }
+    public MovementStatics.MovementAxis Axis{
+        get{return axis;}
+        set{axis = value;}
+    } 
+
+    public ref Vector2 MoveDirection{
+        get{return ref moveDirection;}
+    }
 }
 
 public class Movee 
