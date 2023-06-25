@@ -11,16 +11,6 @@ public class PlayerMovementInput : MonoBehaviour
     //System Stuff
     [SerializeField]private PlayerMoveeProperties playerMoveeProperties;
     
-    private void OnEnable(){
-        //Detects Speed Change but does not work with inspector
-        //Detects Movement and Adjusts Directions
-        MoveeProperties.OnSpeedChange += UpdateSpeed;
-    }
-
-    private void OnDisable(){
-        MoveeProperties.OnSpeedChange -= UpdateSpeed;
-    }
-
     private void Start()
     {
         PlayerInitializing();
@@ -29,7 +19,7 @@ public class PlayerMovementInput : MonoBehaviour
     private void Update()
     {
         //UpdateSpeed();
-        ProcessInputs();  
+        ProcessInputs(); 
     }
 
     private void FixedUpdate(){
@@ -40,8 +30,7 @@ public class PlayerMovementInput : MonoBehaviour
     //Then, instantiates the move points and their references.
     //Then, sets up Movee based on Movee Properties.
     private void PlayerInitializing(){
-        playerMoveeProperties.InstantiateMovePoint(playerMoveeProperties);
-        playerMoveeProperties.SetUpUnitMovee(playerMoveeProperties);
+        playerMoveeProperties.InstantiateMovePoint(this.playerMoveeProperties);
     }
     
     //Guess what this is for..
@@ -57,28 +46,22 @@ public class PlayerMovementInput : MonoBehaviour
     //Makes it so if the Player inputs another movement, it changes to that.
     //Overriding the previous direction with the new direction.
     private void InputOverride(){
-        if (Input.GetButtonDown("Horizontal")) playerMoveeProperties.Axis = MovementStatics.MovementAxis.Horizontal;
-        if (Input.GetButtonDown("Vertical")) playerMoveeProperties.Axis = MovementStatics.MovementAxis.Vertical;
+        if (Input.GetButtonDown("Horizontal")) playerMoveeProperties.RefAxis = MovementStatics.MovementAxis.Horizontal;
+        if (Input.GetButtonDown("Vertical")) playerMoveeProperties.RefAxis = MovementStatics.MovementAxis.Vertical;
 
-        if (Input.GetButtonUp("Horizontal") && Input.GetButton("Vertical")) playerMoveeProperties.Axis = MovementStatics.MovementAxis.Vertical;
-        if (Input.GetButtonUp("Vertical") && Input.GetButton("Horizontal")) playerMoveeProperties.Axis = MovementStatics.MovementAxis.Horizontal;
+        if (Input.GetButtonUp("Horizontal") && Input.GetButton("Vertical")) playerMoveeProperties.RefAxis = MovementStatics.MovementAxis.Vertical;
+        if (Input.GetButtonUp("Vertical") && Input.GetButton("Horizontal")) playerMoveeProperties.RefAxis = MovementStatics.MovementAxis.Horizontal;
     }
 
     //Hands over Player Movee and Move Direction to manipulate movement in Movement.cs
     private void PlayerMoving(){
-        Movement.Move(playerMoveeProperties.UnitMovee, playerMoveeProperties.MoveDirection);
-    }
-
-    //Used for changing speed. Currently also in Update.
-    private void UpdateSpeed(){
-        playerMoveeProperties.UnitMovee.speed = playerMoveeProperties.Speed;
+        Movement.Move(playerMoveeProperties, playerMoveeProperties.MoveDirection);
     }
 
     public PlayerMoveeProperties PlayerMoveeProperties{
         get{return playerMoveeProperties;}
         set{playerMoveeProperties = value;}
     }
-
 }
 
 

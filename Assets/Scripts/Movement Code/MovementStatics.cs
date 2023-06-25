@@ -20,14 +20,26 @@ public class MovementStatics
     }
 
     //Handles Movement so it can only ever be four directions
-    public static void AxisLocker(MovementAxis axis, ref Vector2 moveDirection){
+    public static void AxisLocker(MovementStatics.MovementAxis axis, float moveDirectionX, float moveDirectionY){
         switch (axis)
         {
             case MovementAxis.Horizontal:
-                moveDirection.y = 0;
+                moveDirectionY = 0;
                 break;
             case MovementAxis.Vertical:
-                moveDirection.x = 0;
+                moveDirectionX = 0;
+                break;
+        }
+    }
+
+    public static void AxisLocker(MoveeProperties unit){
+        switch (unit.Axis)
+        {
+            case MovementAxis.Horizontal:
+                unit.MoveDirectionY = 0;
+                break;
+            case MovementAxis.Vertical:
+                unit.MoveDirectionX = 0;
                 break;
         }
     }
@@ -49,7 +61,7 @@ public class MovementStatics
     }
     
     //Makes object move towards Move Point
-    public static void MoveTowardsMovePoint(Movee movee){
-        movee.transform.position = Vector3.MoveTowards(movee.transform.position, movee.movePoint.position, movee.speed * Time.deltaTime);
+    public static void MoveTowardsMovePoint(MoveeProperties moveeProps){
+        moveeProps.transform.position = Vector3.MoveTowards(moveeProps.transform.position, moveeProps.MovePoint.position, moveeProps.Speed * Time.deltaTime);
     }
 }

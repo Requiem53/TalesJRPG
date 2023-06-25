@@ -7,29 +7,19 @@ using UnityEngine;
 public abstract class MoveeProperties : MonoBehaviour
 {
     //Serialize if you want to debug
-    [SerializeField] private MovementStatics.FaceDirection faceDirection;
-    private MovementStatics.MovementAxis axis;
+    [SerializeField] private MovementStatics.FaceDirection _faceDirection;
+    [SerializeField] private MovementStatics.MovementAxis _axis;
+    [SerializeField] private Vector2 _moveDirection;
+
     [SerializeField] private float _speed = 6;
     [SerializeField] private LayerMask _obstacle;
-    private Vector2 moveDirection;
-
-    private Movee unitMovee;
-
+    
     private Transform _movePoint;
 
     private GameObject _motherMovePoint;
     private GameObject _parentMovePoint;
     
     public static event Action<MoveeProperties> OnMoveePropsCreation;
-
-    private void OnEnable(){
-        Movement.OnObjectMove += UpdateDirections;
-    }
-
-    private void OnDisable(){
-        Movement.OnObjectMove -= UpdateDirections;
-    }
-
 
     //Gets Mother and Parent Move Point reference from AssignMotherMoveToMovee.cs
     //Mother Move Point serves as the main prefab which all Move Points come from
@@ -39,13 +29,6 @@ public abstract class MoveeProperties : MonoBehaviour
         OnMoveePropsCreation?.Invoke(unit);
     }
 
-    //Assigns Movee Property values to a Movee Variable.
-    //Movee Properties below the class
-    public void SetUpUnitMovee(MoveeProperties unit){
-        Debug.Log("I wonder what'm gnna screw up this time");
-        unit.UnitMovee = new Movee(unit.MovePoint,unit.transform,unit._speed,unit._obstacle);
-    }
-
     //Assigns Mother and Parent Move Point to an object.
     public virtual void InstantiateMovePoint(MoveeProperties unit){
         SetUpMotherMovePointReference(unit);
@@ -53,10 +36,22 @@ public abstract class MoveeProperties : MonoBehaviour
         objectMovePoint.name = "Object MovePoint";
         unit.MovePoint = objectMovePoint.transform;
     }
+    
+    private void LateUpdate(){
+        MoveeProperties.AxisLocker(this);
+    }
 
-    //Used to update the Axis, Face Direction, and MoveDirection of a Movee
-    private void UpdateDirections(){
-        Movement.UpdateDirections(Axis, ref FaceDirection, ref MoveDirection);
+    //Locks Movement to 4 directions.
+    public static void AxisLocker(MoveeProperties unit){
+        switch (unit.Axis)
+        {
+            case MovementStatics.MovementAxis.Horizontal:
+                unit.MoveDirectionY = 0;
+                break;
+            case MovementStatics.MovementAxis.Vertical:
+                unit.MoveDirectionX = 0;
+                break;
+        }
     }
 
     public GameObject MotherMovePoint{
@@ -74,11 +69,6 @@ public abstract class MoveeProperties : MonoBehaviour
         set{_movePoint = value;}
     }
 
-    public Movee UnitMovee{
-        get{return unitMovee;}
-        set{unitMovee = value;}
-    }
-
     //Does not work on editor with Unity :(
     //Invokes don't call with setter methods when settings values in Inspector
     public static event Action OnSpeedChange;
@@ -86,47 +76,44 @@ public abstract class MoveeProperties : MonoBehaviour
     public float Speed{
         get{return _speed;}
         set{
-            UnitMovee.speed = value;
+            _speed = value;
             OnSpeedChange?.Invoke();
         }
     }
 
     public LayerMask Obstacle{
         get{return _obstacle;}
-        set{UnitMovee.obstacle = value;
-                                }
+        set{_obstacle = value;}
     }
 
-    public ref MovementStatics.FaceDirection FaceDirection{
-        get{return ref faceDirection;}
+    public ref MovementStatics.FaceDirection RefFaceDirection{
+        get{return ref _faceDirection;}
     }
 
-    public static event Action OnAxisChange;
+    public ref MovementStatics.MovementAxis RefAxis{
+        get{return ref _axis;}
+    }
     public MovementStatics.MovementAxis Axis{
-        get{return axis;}
-        set{
-            axis = value;
-            OnAxisChange?.Invoke();}
-    } 
-
-    public ref Vector2 MoveDirection{
-        get{return ref moveDirection;}
+        get{return _axis;}
+        set{_axis = value;}
     }
-}
 
-public class Movee 
-{
-    //A Movee contains the Point at which the object moves toward, it's transform,
-    //speed, and what it can go through.
-    public Transform movePoint;
-    public Transform transform;
-    public float speed;
-    public LayerMask obstacle;
+    public ref Vector2 RefMoveDirection{
+        get{return ref _moveDirection;}
+    }
 
-    public Movee(Transform movePoint, Transform transform, float speed, LayerMask obstacle){
-        this.movePoint = movePoint;
-        this.transform = transform;
-        this.speed = speed;
-        this.obstacle = obstacle;
+    public Vector2 MoveDirection{
+        get{return _moveDirection;}
+        set{_moveDirection = value;}
+    }
+
+    public float MoveDirectionX{
+        get{return _moveDirection.x;}
+        set{_moveDirection.x = value;}
+    }
+
+    public float MoveDirectionY{
+        get{return _moveDirection.y;}
+        set{_moveDirection.y = value;}
     }
 }
