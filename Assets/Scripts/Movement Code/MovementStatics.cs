@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class MovementStatics
@@ -59,7 +60,42 @@ public class MovementStatics
             direction = FaceDirection.South;
         }
     }
-    
+
+    //Overloaded method with Animator
+    //Temporary
+    public static void FacingDirection(ref FaceDirection direction, ref Vector2 moveDirection, Animator animator){
+        if(moveDirection.x == 0 && moveDirection.y == 1){
+            direction = FaceDirection.North;
+            animator.SetBool("faceNorth", true);
+            animator.SetBool("faceSouth", false);
+            animator.SetBool("faceEast", false);
+            animator.SetBool("faceWest", false);
+        }else if(moveDirection.x == 0 && moveDirection.y == -1){
+            direction = FaceDirection.South;
+            animator.SetBool("faceNorth", false);
+            animator.SetBool("faceSouth", true);
+            animator.SetBool("faceEast", false);
+            animator.SetBool("faceWest", false);
+        }else if(moveDirection.x == 1 && moveDirection.y == 0){
+            direction = FaceDirection.East;
+            animator.SetBool("faceNorth", false);
+            animator.SetBool("faceSouth", false);
+            animator.SetBool("faceEast", true);
+            animator.SetBool("faceWest", false);
+        }else if(moveDirection.x == -1 && moveDirection.y == 0){
+            direction = FaceDirection.West;
+            animator.SetBool("faceNorth", false);
+            animator.SetBool("faceSouth", false);
+            animator.SetBool("faceEast", false);
+            animator.SetBool("faceWest", true);
+        }else{
+            direction = FaceDirection.South;
+            animator.SetBool("faceNorth", false);
+            animator.SetBool("faceSouth", true);
+            animator.SetBool("faceEast", false);
+            animator.SetBool("faceWest", false);
+        }
+    }
     //Makes object move towards Move Point
     public static void MoveTowardsMovePoint(MoveeProperties moveeProps){
         moveeProps.transform.position = Vector3.MoveTowards(moveeProps.transform.position, moveeProps.MovePoint.position, moveeProps.Speed * Time.deltaTime);

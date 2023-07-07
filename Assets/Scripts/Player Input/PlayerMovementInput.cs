@@ -9,7 +9,9 @@ public class PlayerMovementInput : MonoBehaviour
     //This is so fundamentally flawed
 
     //System Stuff
-    [SerializeField]private PlayerMoveeProperties playerMoveeProperties;
+    private PlayerMoveeProperties playerMoveeProperties;
+
+    //Move to Movee Properties later
     
     private void Start()
     {
@@ -18,7 +20,6 @@ public class PlayerMovementInput : MonoBehaviour
 
     private void Update()
     {
-        //UpdateSpeed();
         ProcessInputs(); 
     }
 
@@ -26,10 +27,23 @@ public class PlayerMovementInput : MonoBehaviour
         PlayerMoving();
     }
 
+    // private void OnEnable(){
+    //     Movement.OnObjectMove += TestArrive;
+    // }
+
+    // private void OnDisable(){
+    //     Movement.OnObjectMove -= TestArrive;
+    // }
+
+    // private void TestArrive(){
+    //     Debug.Log(this.gameObject.name + " has arrived to their move point");
+    // }
+
     //First, references the PlayerMove which contains all Movee Properties data.
     //Then, instantiates the move points and their references.
     //Then, sets up Movee based on Movee Properties.
     private void PlayerInitializing(){
+        playerMoveeProperties = this.GetComponent<PlayerMoveeProperties>();
         playerMoveeProperties.InstantiateMovePoint(this.playerMoveeProperties);
     }
     
@@ -55,7 +69,7 @@ public class PlayerMovementInput : MonoBehaviour
 
     //Hands over Player Movee and Move Direction to manipulate movement in Movement.cs
     private void PlayerMoving(){
-        Movement.Move(playerMoveeProperties, playerMoveeProperties.MoveDirection);
+        Movement.Move(playerMoveeProperties, playerMoveeProperties.MoveDirection, playerMoveeProperties.SpriteRenderer, playerMoveeProperties.HasMoved);
     }
 
     public PlayerMoveeProperties PlayerMoveeProperties{

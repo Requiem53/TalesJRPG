@@ -5,44 +5,50 @@ using UnityEngine;
 
 public class Movement
 {
-    //public static event Action OnObjectMove;
+    public static event Action OnObjectMove;
 
     //First, always moves object to move point before queueing another movement.
     //Then, stops once object arrives to move point.
     //After that, checks if object really is inside the move point.
-    //Then does another check if there is an obstacle to the direction we move.
+    //Then, it checks what direction its supposed to move next.
+    //Then, it adjusts what direction the player should be facing.
+    //Then, does another check if there is an obstacle to the direction we move.
     //Then applies movement depending on the direction.
-    //Then changes the indicator of the direction faced.
-    public static void Move(MoveeProperties moveeProps, Vector2 moveDirection){
+
+    public static void Move(MoveeProperties moveeProps, Vector2 moveDirection, SpriteRenderer renderer, bool HasMoved)
+    {
         MovementStatics.MoveTowardsMovePoint(moveeProps);
-
-        if(Vector3.Distance(moveeProps.transform.position, moveeProps.MovePoint.position) <= 0.05f){
-
-            if(!Physics2D.OverlapCircle((moveeProps.MovePoint.position + new Vector3(moveDirection.x, 0f, 0f)), .2f, moveeProps.Obstacle)){
-
-                if(Mathf.Abs(moveDirection.x) == 1f){
-                    moveeProps.MovePoint.position += new Vector3(moveDirection.x, 0f, 0f);
-                    UpdateDirections(ref moveeProps.RefFaceDirection, ref moveeProps.RefMoveDirection);
-                }
-
+        if(Vector3.Distance(moveeProps.transform.position, moveeProps.MovePoint.position) <= 0.05f)
+        {
+            if(HasMoved)
+            {
+                Debug.Log("And even though it's such a goddamn lie");
+                //Technically called on object stop but whatevs.
+                OnObjectMove?.Invoke();
             }
-            if(!Physics2D.OverlapCircle(moveeProps.MovePoint.position + new Vector3(0f, moveDirection.y, 0f), .2f, moveeProps.Obstacle)){
-                if(Mathf.Abs(moveDirection.y) == 1f){
-                    moveeProps.MovePoint.position += new Vector3(0f, moveDirection.y, 0f);
-                    UpdateDirections(ref moveeProps.RefFaceDirection, ref moveeProps.RefMoveDirection);
+            if(Mathf.Abs(moveDirection.x) == 1f)
+            {
+                MovementStatics.FacingDirection(ref moveeProps.RefFaceDirection, ref moveeProps.RefMoveDirection, moveeProps.Animator);
+                if(!Physics2D.OverlapBox(moveeProps.MovePoint.position + new Vector3(moveDirection.x, 0f, 0f), renderer.bounds.size, 0, moveeProps.Obstacle))
+                {
+                    OnObjectMove?.Invoke();
+                    moveeProps.MovePoint.position += new Vector3(moveDirection.x, 0f, 0f);
+                }
+            }
+            if(Mathf.Abs(moveDirection.y) == 1f)
+            {
+                MovementStatics.FacingDirection(ref moveeProps.RefFaceDirection, ref moveeProps.RefMoveDirection, moveeProps.Animator);
+                if(!Physics2D.OverlapBox(moveeProps.MovePoint.position + new Vector3(0f, moveDirection.y, 0f), renderer.bounds.size, 0, moveeProps.Obstacle)){
+                    OnObjectMove?.Invoke();
+                    moveeProps.MovePoint.position += new Vector3(0f, moveDirection.y, 0f);  
                 }
             }
         }
     }
 
-    //Used to update Movee's Axis, Face Direction, and Move Direction
-    public static void UpdateDirections(ref MovementStatics.FaceDirection faceDirection, ref Vector2 moveDirection)
-    {
-        MovementStatics.FacingDirection(ref faceDirection, ref moveDirection);
-    }
 
     //?? To change
-    public void stop(float duration){
+    public void Stop(float duration){
         if(duration > 0){
             duration -= Time.deltaTime;
         }

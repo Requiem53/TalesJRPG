@@ -7,19 +7,57 @@ using UnityEngine;
 public abstract class MoveeProperties : MonoBehaviour
 {
     //Serialize if you want to debug
-    [SerializeField] private MovementStatics.FaceDirection _faceDirection;
-    [SerializeField] private MovementStatics.MovementAxis _axis;
-    [SerializeField] private Vector2 _moveDirection;
-
-    [SerializeField] private float _speed = 6;
+    [SerializeField] private float _speed = 2.8f;
     [SerializeField] private LayerMask _obstacle;
-    
+
+    [SerializeField] private MovementStatics.FaceDirection _faceDirection;
+    private MovementStatics.MovementAxis _axis;
+    private Vector2 _moveDirection;
+
     private Transform _movePoint;
 
     private GameObject _motherMovePoint;
     private GameObject _parentMovePoint;
-    
+
     public static event Action<MoveeProperties> OnMoveePropsCreation;
+
+    private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
+
+    [SerializeField] private bool _hasMoved;
+
+    private void HasObjectMoved()
+    {
+        if(_hasMoved){
+            _hasMoved = false;
+        }else{
+            _hasMoved = true;
+        }
+    }
+
+    private void OnEnable()
+    {
+        Movement.OnObjectMove += HasObjectMoved;
+    }
+    private void OnDisable()
+    {
+        Movement.OnObjectMove -= HasObjectMoved;
+    }
+    private void Start(){
+        //Gets reference on object that all movees should have
+        _spriteRenderer = this.GetComponent<SpriteRenderer>();
+        _animator = this.GetComponent<Animator>();
+    }
+
+    //Maybe add setter methods soon
+    public SpriteRenderer SpriteRenderer{
+        get{return _spriteRenderer;}
+    }
+
+    public Animator Animator{
+        get{return this.GetComponent<Animator>();}
+        //set{_animator = value;}
+    }
 
     //Gets Mother and Parent Move Point reference from AssignMotherMoveToMovee.cs
     //Mother Move Point serves as the main prefab which all Move Points come from
@@ -30,6 +68,7 @@ public abstract class MoveeProperties : MonoBehaviour
     }
 
     //Assigns Mother and Parent Move Point to an object.
+    //Also assigns the animator
     public virtual void InstantiateMovePoint(MoveeProperties unit){
         SetUpMotherMovePointReference(unit);
         var objectMovePoint = (GameObject) Instantiate(unit.MotherMovePoint,unit.transform.position,Quaternion.identity, unit.ParentMovePoint.transform);
@@ -115,5 +154,9 @@ public abstract class MoveeProperties : MonoBehaviour
     public float MoveDirectionY{
         get{return _moveDirection.y;}
         set{_moveDirection.y = value;}
+    }
+
+    public bool HasMoved{
+        get{return _hasMoved;}
     }
 }
