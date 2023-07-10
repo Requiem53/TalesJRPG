@@ -8,9 +8,9 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI _nameText;
     [SerializeField] private TMPro.TextMeshProUGUI _healthText;
 
-    public void SetHUD(BattleStats stats)
+    public void SetHUD(Stats stats)
     {
-        _nameText.text = stats.Name;
-        _healthText.text = stats.Health + "/" + stats.MaxHealth;
+        _nameText.text = stats.CharInfo.Name;
+        _healthText.text = stats.CharInfo.CurrentHealth + "/" + stats.MaxHealth;
     }
 }
