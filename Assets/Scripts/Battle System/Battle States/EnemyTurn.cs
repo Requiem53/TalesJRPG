@@ -9,13 +9,14 @@ internal class EnemyTurn : BattleState
 
     public override IEnumerator Start()
     {
-        BattleSystem.SetDialogue(BattleSystem.EnemyStats.CharInfo.Name + " attacks you!");
+        //This be temporary fixes
+        BattleSystem.SetDialogue(BattleSystem.Enemy[0].Stats.CharInfo.Name + " attacks you!");
 
         yield return new WaitForSeconds(1f);
 
-        bool isDead = BattleSystem.PlayerStats.TakeDamage(BattleSystem.EnemyStats.Damage);
+        bool isDead = BattleSystem.Player[0].Stats.TakeDamage(BattleSystem.Enemy[0].Stats.Damage);
 
-        BattleSystem.PlayerHUD.SetHUD(BattleSystem.PlayerStats);
+        BattleSystem.Player[0].SetHUD();
 
         yield return new WaitForSeconds(1f);
 

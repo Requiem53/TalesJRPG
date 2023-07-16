@@ -15,11 +15,11 @@ internal class PlayerTurn : BattleState
 
     public override IEnumerator Attack()
     {
-        bool isDead = BattleSystem.EnemyStats.TakeDamage(BattleSystem.PlayerStats.Damage);
+        bool isDead = BattleSystem.Enemy[0].Stats.TakeDamage(BattleSystem.Player[0].Stats.Damage);
 
-        BattleSystem.SetDialogue(BattleSystem.PlayerStats.CharInfo.Name + " attacked " + BattleSystem.EnemyStats.CharInfo.Name + "!");
+        BattleSystem.SetDialogue(BattleSystem.Player[0].Stats.CharInfo.Name + " attacked " + BattleSystem.Enemy[0].Stats.CharInfo.Name + "!");
 
-        BattleSystem.EnemyHUD.SetHUD(BattleSystem.EnemyStats);
+        BattleSystem.Enemy[0].SetHUD();
 
         yield return new WaitForSeconds(1f);
 
@@ -34,10 +34,10 @@ internal class PlayerTurn : BattleState
 
     public override IEnumerator Heal()
     {
-        BattleSystem.PlayerStats.Heal(10);
-        BattleSystem.SetDialogue(BattleSystem.PlayerStats.CharInfo.Name + " healed themselves!");
+        BattleSystem.Player[0].Stats.Heal(10);
+        BattleSystem.SetDialogue(BattleSystem.Player[0].Stats.CharInfo.Name + " healed themselves!");
 
-        BattleSystem.PlayerHUD.SetHUD(BattleSystem.PlayerStats);
+        BattleSystem.Player[0].SetHUD();
         yield return new WaitForSeconds(1f);
 
         BattleSystem.SetState(new EnemyTurn(BattleSystem));

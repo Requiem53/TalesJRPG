@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BattleSummon : MonoBehaviour
 {
-    [SerializeField] private List<BattlersInformation> _playerCharacters;
-    [SerializeField] private List<BattlersInformation> _enemyCharacters;
+    [SerializeField] private List<Stats> _playerCharacters;
+    [SerializeField] private List<Stats> _enemyCharacters;
 
     [SerializeField] private Transform _playerBattleStation;
     [SerializeField] private Transform _enemyBattleStation;
@@ -21,7 +21,7 @@ public class BattleSummon : MonoBehaviour
         SummonCharacters(_enemyCharacters, _enemyBattleStation);
     }
 
-    private static void SummonCharacters(List<BattlersInformation> characters, Transform battleStation)
+    private static void SummonCharacters(List<Stats> characters, Transform battleStation)
     {
         for(int i = 0; i < characters.Count; i++)
         {
