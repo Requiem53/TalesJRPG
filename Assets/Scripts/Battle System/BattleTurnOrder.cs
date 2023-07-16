@@ -5,11 +5,12 @@ using UnityEngine;
 public class BattleTurnOrder : MonoBehaviour
 {
     [SerializeField] private BattleSystem _battleSystem;
-    [SerializeField] private List<Stats> _turnOrder;
+    [SerializeField] private List<BattleHUD> _turnOrder;
     [SerializeField] private int _turnNumber;
 
     public int TurnNumber { get => _turnNumber; set => _turnNumber = value; }
-    public List<Stats> TurnOrder { get => _turnOrder; set => _turnOrder = value; }
+    public List<BattleHUD> TurnOrder { get => _turnOrder; set => _turnOrder = value; }
+    public BattleSystem BattleSystem { get => _battleSystem; set => _battleSystem = value; }
 
     private void Start()
     {
@@ -25,20 +26,21 @@ public class BattleTurnOrder : MonoBehaviour
             SortSpeed();
         }
     }
-    private void SortSpeed()
+    public void SortSpeed()
     {
         TurnOrder.Sort(new SpeedCompare());
     }
 
     private void CombineList()
     {
-        for(int i = 0; i < _battleSystem.Player.Count; i++)
+        for(int i = 0; i < BattleSystem.Player.Count; i++)
         {
-            TurnOrder.Add(_battleSystem.Player[i].Stats);
+            TurnOrder.Add(BattleSystem.Player[i]);
         }
-        for(int i = 0; i < _battleSystem.Enemy.Count; i++)
+        for(int i = 0; i < BattleSystem.Enemy.Count; i++)
         {
-            TurnOrder.Add(_battleSystem.Enemy[i].Stats);
+            TurnOrder.Add(BattleSystem.Enemy[i]);
         }
     }
+
 }

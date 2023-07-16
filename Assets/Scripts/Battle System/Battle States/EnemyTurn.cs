@@ -16,16 +16,15 @@ internal class EnemyTurn : BattleState
 
         BattleSystem.Player[0].SetHUD();
 
-        yield return new WaitForSeconds(1f);
-        IncrementTurn();        
+        yield return new WaitForSeconds(1f); 
 
         if(isDead)
         {
             BattleSystem.SetState(new Lost(BattleSystem));
-        }else
+        }
+        else
         {
-            BattleSystem.SetState(new Turn(BattleSystem));
-
+            NextTurn();
         }
 
     }

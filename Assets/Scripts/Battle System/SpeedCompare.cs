@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedCompare : IComparer<Stats>
+public class SpeedCompare : IComparer<BattleHUD>
 {
-    public int Compare(Stats x, Stats y)
+    public int Compare(BattleHUD x, BattleHUD y)
     {
-        if(x.Speed <= y.Speed)
+        if(x.Stats.Speed <= y.Stats.Speed)
         {
             return 1;
         }
-        if(x.Speed >= y.Speed)
+        if(x.Stats.Speed >= y.Stats.Speed)
         {
             return -1;
         }
@@ -19,3 +19,4 @@ public class SpeedCompare : IComparer<Stats>
     }
 
 }
+

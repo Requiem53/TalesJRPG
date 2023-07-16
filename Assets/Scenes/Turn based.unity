@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 91922063}
   - component: {fileID: 91922064}
   m_Layer: 5
-  m_Name: 'Player2 Stats '
+  m_Name: 'Maurice Stats '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 143536606}
   - component: {fileID: 143536607}
   m_Layer: 5
-  m_Name: Player1 Stats
+  m_Name: Slamm Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1004,7 +1004,7 @@ GameObject:
   - component: {fileID: 825611319}
   - component: {fileID: 825611320}
   m_Layer: 5
-  m_Name: Enemy1 Stats
+  m_Name: Julius Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1834,7 +1834,7 @@ GameObject:
   - component: {fileID: 1219366822}
   - component: {fileID: 1219366823}
   m_Layer: 5
-  m_Name: 'Enemy2 Stats '
+  m_Name: 'Joseph Stats '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

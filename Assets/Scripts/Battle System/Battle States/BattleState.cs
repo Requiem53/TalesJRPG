@@ -6,9 +6,11 @@ public abstract class BattleState
 {
     protected BattleSystem BattleSystem;
 
+    protected BattleTurnOrder BattleTurn{get => BattleSystem.Turn;}
     protected int TurnNumber{get => BattleSystem.Turn.TurnNumber;}
-    protected Stats Battler{get => BattleSystem.Turn.TurnOrder[TurnNumber];}
-    //protected CharacterInfo AttackerInfo{get => Battler.CharInfo;}
+    protected BattleHUD BattlerHUD{get => BattleSystem.Turn.TurnOrder[TurnNumber];}
+    protected Stats Battler{get => BattlerHUD.Stats;}
+    //protected BattleHUD{get => BattleSystem.BattleHUD}
 
     public BattleState(BattleSystem battleSystem)
     {
@@ -38,11 +40,7 @@ public abstract class BattleState
 
     protected void IncrementTurn()
     {
-        if(BattleSystem.Turn.TurnOrder.Count - 1 == TurnNumber)
-        {
-            BattleSystem.Turn.TurnNumber = 0;
-        }
-        else
+        if(!LastTurn())
         {
             BattleSystem.Turn.TurnNumber++;
         }
@@ -51,12 +49,43 @@ public abstract class BattleState
 
     protected bool IsPlayable()
     {
-        if(BattleSystem.Turn.TurnOrder[BattleSystem.Turn.TurnNumber].IsPlayable)
+        if(Battler.IsPlayable)
         {
             return true;
         }
 
         return false;
+    }
+
+    protected bool LastTurn()
+    {
+        if(BattleSystem.Turn.TurnOrder.Count - 1 == TurnNumber)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    protected void ResetTurn()
+    {
+        BattleSystem.Turn.TurnNumber = 0;
+        BattleTurn.SortSpeed();
+    }
+
+    protected void NextTurn()
+    {
+        if(LastTurn())
+            {
+                BattleSystem.SetState(new TurnWrap(BattleSystem));
+            }
+            else
+            {
+                IncrementTurn();
+                BattleSystem.SetState(new Turn(BattleSystem));          
+            }
     }
 
 }

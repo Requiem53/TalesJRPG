@@ -9,6 +9,7 @@ public abstract class BattleStateMachine : MonoBehaviour
     public void SetState(BattleState battleState)
     {
         BattleState = battleState;
+        Debug.Log("State: " + BattleState);
         StartCoroutine(BattleState.Start());
     }
     

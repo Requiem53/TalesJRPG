@@ -20,17 +20,16 @@ internal class PlayerTurn : BattleState
         BattleSystem.SetDialogue(Battler.CharInfo.Name + " attacked " + BattleSystem.Enemy[0].Stats.CharInfo.Name + "!");
 
         BattleSystem.Enemy[0].SetHUD();
-
+    
         yield return new WaitForSeconds(1f);
 
-        IncrementTurn();
         if(isDead)
         {
-            BattleSystem.SetState(new Won(BattleSystem));
-        }else
+            BattleSystem.SetState(new Lost(BattleSystem));
+        }
+        else
         {
-            BattleSystem.SetState(new Turn(BattleSystem));
-            
+            NextTurn();
         }
     }
 
@@ -40,12 +39,13 @@ internal class PlayerTurn : BattleState
         BattleSystem.SetDialogue(Battler.CharInfo.Name + " healed themselves!");
 
         //Change soon to be consistent with everything
-        BattleSystem.Player[TurnNumber].SetHUD();
+        BattlerHUD.SetHUD();
         yield return new WaitForSeconds(1f);
 
-        BattleSystem.SetState(new Turn(BattleSystem));
-        IncrementTurn();
+        NextTurn();
     }
+
+
 
 
 
