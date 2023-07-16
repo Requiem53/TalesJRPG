@@ -11,13 +11,11 @@ public class Turn : BattleState
     public override IEnumerator Start()
     {
         if(IsPlayable())
-        {
-            IncrementTurn();
+        {   
             BattleSystem.SetState(new PlayerTurn(BattleSystem));
         }
         else
         {
-            IncrementTurn();
             BattleSystem.SetState(new EnemyTurn(BattleSystem));
         }
         

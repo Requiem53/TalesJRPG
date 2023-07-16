@@ -1641,7 +1641,7 @@ GameObject:
   - component: {fileID: 1176481322}
   - component: {fileID: 1176481321}
   m_Layer: 0
-  m_Name: Enemy2
+  m_Name: Joseph
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2121,7 +2121,7 @@ GameObject:
   - component: {fileID: 1585091639}
   - component: {fileID: 1585091638}
   m_Layer: 0
-  m_Name: Player2
+  m_Name: Maurice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3027,7 +3027,7 @@ GameObject:
   - component: {fileID: 9187639972488026008}
   - component: {fileID: 9187639972488026009}
   m_Layer: 0
-  m_Name: Enemy1
+  m_Name: Julius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3226,7 +3226,7 @@ GameObject:
   - component: {fileID: 5187210009456290272}
   - component: {fileID: 5187210009456290273}
   m_Layer: 0
-  m_Name: Player1
+  m_Name: Slamm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3288,7 +3288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Julius
   _charClass: {fileID: 0}
-  _level: 53
+  _level: 60
   _currentHealth: 1000
   _currentMana: 1000
 --- !u!114 &9187639972488026012

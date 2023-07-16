@@ -10,22 +10,22 @@ internal class EnemyTurn : BattleState
     public override IEnumerator Start()
     {
         //This be temporary fixes
-        BattleSystem.SetDialogue(BattleSystem.Enemy[0].Stats.CharInfo.Name + " attacks you!");
+        BattleSystem.SetDialogue(Battler.CharInfo.Name + " attacks you!");
 
-        yield return new WaitForSeconds(1f);
-
-        bool isDead = BattleSystem.Player[0].Stats.TakeDamage(BattleSystem.Enemy[0].Stats.Damage);
+        bool isDead = BattleSystem.Player[0].Stats.TakeDamage(Battler.Damage);
 
         BattleSystem.Player[0].SetHUD();
 
         yield return new WaitForSeconds(1f);
+        IncrementTurn();        
 
         if(isDead)
         {
             BattleSystem.SetState(new Lost(BattleSystem));
         }else
         {
-            BattleSystem.SetState(new PlayerTurn(BattleSystem));
+            BattleSystem.SetState(new Turn(BattleSystem));
+
         }
 
     }
