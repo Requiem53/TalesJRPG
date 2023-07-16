@@ -975,6 +975,8 @@ MonoBehaviour:
   enemyHUDs:
   - {fileID: 825611320}
   - {fileID: 1219366823}
+  _playerBattleStation: {fileID: 1632835893}
+  _enemyBattleStation: {fileID: 2100896306}
 --- !u!114 &472435367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -984,17 +986,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 472435364}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbe2c988e2138de44a23c48ad74adbc6, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bc18b369ef32a64691b6a631cc7dbca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCharacters:
-  - {fileID: 5187210009456290272}
-  - {fileID: 1585091639}
-  _enemyCharacters:
-  - {fileID: 9187639972488026008}
-  - {fileID: 1176481322}
-  _playerBattleStation: {fileID: 1632835893}
-  _enemyBattleStation: {fileID: 2100896306}
+  _battleSystem: {fileID: 472435366}
+  _turnOrder: []
+  _test: []
 --- !u!1 &825611318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,9 +1714,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fae9e169daeaf44cba626a2b59f8dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Julius
+  _name: Joseph
   _charClass: {fileID: 0}
-  _level: 50
+  _level: 51
   _currentHealth: 1000
   _currentMana: 1000
 --- !u!95 &1176481324
@@ -2196,9 +2193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fae9e169daeaf44cba626a2b59f8dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Slamm
+  _name: Maurice
   _charClass: {fileID: 0}
-  _level: 50
+  _level: 52
   _currentHealth: 1000
   _currentMana: 1000
 --- !u!95 &1585091641
@@ -3103,7 +3100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Slamm
   _charClass: {fileID: 0}
-  _level: 50
+  _level: 54
   _currentHealth: 1000
   _currentMana: 1000
 --- !u!114 &5187210009456290276
@@ -3286,7 +3283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Julius
   _charClass: {fileID: 0}
-  _level: 50
+  _level: 53
   _currentHealth: 1000
   _currentMana: 1000
 --- !u!114 &9187639972488026012

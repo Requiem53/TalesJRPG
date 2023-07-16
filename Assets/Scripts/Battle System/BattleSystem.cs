@@ -16,8 +16,13 @@ public class BattleSystem : BattleStateMachine
     public List<BattleHUD> Player => playerHUDs;
     public List<BattleHUD> Enemy => enemyHUDs;
 
+    [SerializeField] private Transform _playerBattleStation;
+    [SerializeField] private Transform _enemyBattleStation;
+
+
     private void Start()
     {
+        SummonCharacters();
         SetState(new Begin(this));
     }
 
@@ -36,5 +41,10 @@ public class BattleSystem : BattleStateMachine
         DialogueText.text = dialogue;
     }
 
+    private void SummonCharacters()
+    {
+        BattleSummon.SummonCharacters(Player, _playerBattleStation);
+        BattleSummon.SummonCharacters(Enemy, _enemyBattleStation);
+    }
 
 }
