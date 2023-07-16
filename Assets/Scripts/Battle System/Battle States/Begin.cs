@@ -21,7 +21,7 @@ public class Begin : BattleState
 
         yield return new WaitForSeconds(1f);
 
-        BattleSystem.SetState(new PlayerTurn(BattleSystem));
+        BattleSystem.SetState(new Turn(BattleSystem));
     }
 
     

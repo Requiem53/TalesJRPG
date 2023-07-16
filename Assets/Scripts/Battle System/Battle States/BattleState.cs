@@ -26,4 +26,19 @@ public abstract class BattleState
         yield break;
     }
 
+    protected void IncrementTurn()
+    {
+        BattleSystem.Turn.TurnNumber++;
+    }
+
+    protected bool IsPlayable()
+    {
+        if(BattleSystem.Turn.TurnOrder[BattleSystem.Turn.TurnNumber].IsPlayable)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
 }

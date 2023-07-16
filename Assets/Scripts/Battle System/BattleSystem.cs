@@ -5,16 +5,18 @@ using UnityEngine.UI;
 
 public class BattleSystem : BattleStateMachine
 {
+    [SerializeField] private BattleTurnOrder battleTurnOrder;
     [SerializeField] private TMPro.TextMeshProUGUI dialogueText;
 
     public TMPro.TextMeshProUGUI DialogueText => dialogueText;
 
-    //Maybe combiine both?
     [SerializeField] private List<BattleHUD> playerHUDs;
     [SerializeField] private List<BattleHUD> enemyHUDs;
 
     public List<BattleHUD> Player => playerHUDs;
     public List<BattleHUD> Enemy => enemyHUDs;
+
+    public BattleTurnOrder Turn { get => battleTurnOrder; set => battleTurnOrder = value; }
 
     [SerializeField] private Transform _playerBattleStation;
     [SerializeField] private Transform _enemyBattleStation;

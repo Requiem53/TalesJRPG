@@ -11,6 +11,7 @@ public class Stats : MonoBehaviour
     [SerializeField] private int _maxMana;
     [SerializeField] private int _damage;
     [SerializeField] private float _speed;
+    [SerializeField] private bool _isPlayable;
 
     public CharacterInfo CharInfo { get => _charInfo; set => _charInfo = value; }
 
@@ -18,11 +19,13 @@ public class Stats : MonoBehaviour
     public int MaxMana { get => _maxMana;}
     public int Damage { get => _damage;}
     public float Speed { get => _speed;}
+    public bool IsPlayable { get => _isPlayable;}
 
     public int SetMaxHealth { get => _maxHealth; set => _maxHealth = value;}
     public int SetMaxMana { get => _maxMana; set => _maxMana = value; }
     public int SetDamage { get => _damage; set => _damage = value;}
     public float SetSpeed { get => _speed; set => _speed = value;}
+    
 
     public bool TakeDamage(int damage)
     {

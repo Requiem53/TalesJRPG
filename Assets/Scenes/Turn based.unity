@@ -968,6 +968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a77792ebd5fe94fbbd81b05ee9389a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleTurnOrder: {fileID: 472435367}
   dialogueText: {fileID: 1863470022}
   playerHUDs:
   - {fileID: 143536607}
@@ -991,7 +992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _battleSystem: {fileID: 472435366}
   _turnOrder: []
-  _test: []
+  _turnNumber: 0
 --- !u!1 &825611318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1680,7 +1681,7 @@ MonoBehaviour:
   _agility: 0
   _wisdom: 0
   _luck: 0
-  _strengthMult: 1.12
+  _strengthMult: 0.01
   _resilienceMult: 1.12
   _agilityMult: 1.12
   _wisdomMult: 1.12
@@ -1702,6 +1703,7 @@ MonoBehaviour:
   _maxMana: 0
   _damage: 0
   _speed: 0
+  _isPlayable: 0
 --- !u!114 &1176481323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1716,7 +1718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Joseph
   _charClass: {fileID: 0}
-  _level: 51
+  _level: 59
   _currentHealth: 1000
   _currentMana: 1000
 --- !u!95 &1176481324
@@ -2159,7 +2161,7 @@ MonoBehaviour:
   _agility: 0
   _wisdom: 0
   _luck: 0
-  _strengthMult: 1.12
+  _strengthMult: 0.01
   _resilienceMult: 1.12
   _agilityMult: 1.12
   _wisdomMult: 1.12
@@ -2181,6 +2183,7 @@ MonoBehaviour:
   _maxMana: 0
   _damage: 0
   _speed: 0
+  _isPlayable: 1
 --- !u!114 &1585091640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3062,6 +3065,7 @@ MonoBehaviour:
   _maxMana: 0
   _damage: 0
   _speed: 0
+  _isPlayable: 1
 --- !u!114 &5187210009456290273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3081,7 +3085,7 @@ MonoBehaviour:
   _agility: 0
   _wisdom: 0
   _luck: 0
-  _strengthMult: 1.12
+  _strengthMult: 0.01
   _resilienceMult: 1.12
   _agilityMult: 1.12
   _wisdomMult: 1.12
@@ -3245,6 +3249,7 @@ MonoBehaviour:
   _maxMana: 0
   _damage: 0
   _speed: 0
+  _isPlayable: 0
 --- !u!114 &9187639972488026009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3264,7 +3269,7 @@ MonoBehaviour:
   _agility: 0
   _wisdom: 0
   _luck: 0
-  _strengthMult: 1.12
+  _strengthMult: 0.01
   _resilienceMult: 1.12
   _agilityMult: 1.12
   _wisdomMult: 1.12
