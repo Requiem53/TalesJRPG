@@ -10,7 +10,7 @@ public class Turn : BattleState
 
     public override IEnumerator Start()
     {
-        if(IsPlayable())
+        if(BattleSystem.Battler.IsPlayable)
         {   
             BattleSystem.SetState(new PlayerTurn(BattleSystem));
         }

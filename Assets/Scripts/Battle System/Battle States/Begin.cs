@@ -11,6 +11,7 @@ public class Begin : BattleState
     public override IEnumerator Start()
     {    
         //TURN ON STATS should be here
+        ResetTurn();
         BattleSystem.SetDialogue("A wild " + BattleSystem.Enemy[0].Stats.CharInfo.Name + " approaches....");
         BattleHUDHandler.InitializeHUDS(BattleSystem.Player);
         BattleHUDHandler.InitializeHUDS(BattleSystem.Enemy);

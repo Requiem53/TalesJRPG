@@ -25,7 +25,6 @@ public class Stats : MonoBehaviour
     public int SetMaxMana { get => _maxMana; set => _maxMana = value; }
     public int SetDamage { get => _damage; set => _damage = value;}
     public float SetSpeed { get => _speed; set => _speed = value;}
-    
 
     public bool TakeDamage(int damage)
     {

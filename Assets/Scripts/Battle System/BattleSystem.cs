@@ -49,4 +49,8 @@ public class BattleSystem : BattleStateMachine
         BattleSummon.SummonCharacters(Enemy, _enemyBattleStation);
     }
 
+    public BattleTurnOrder BattleTurn{get => this.Turn;}
+    public int TurnNumber{get => this.Turn.TurnNumber;}
+    public BattleHUD BattlerHUD{get => this.Turn.TurnOrder[TurnNumber];}
+    public Stats Battler{get => BattlerHUD.Stats;}
 }

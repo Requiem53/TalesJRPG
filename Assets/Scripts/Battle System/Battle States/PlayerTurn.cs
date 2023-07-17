@@ -25,7 +25,7 @@ internal class PlayerTurn : BattleState
 
         if(isDead)
         {
-            BattleSystem.SetState(new Lost(BattleSystem));
+            BattleSystem.SetState(new Won(BattleSystem));
         }
         else
         {

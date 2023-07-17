@@ -9,6 +9,7 @@ internal class Won : BattleState
     public override IEnumerator Start()
     {
         BattleSystem.SetDialogue("You win!");
+        BattleSystem.SetState(new Begin(BattleSystem));
         yield break;
     }
 }
