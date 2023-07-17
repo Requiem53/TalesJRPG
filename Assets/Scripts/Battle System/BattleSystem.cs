@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class BattleSystem : BattleStateMachine
 {
-    [SerializeField] private BattleTurnOrder battleTurnOrder;
+    [SerializeReference] private BattleTurnOrder battleTurnOrder;
     [SerializeField] private TMPro.TextMeshProUGUI dialogueText;
 
     public TMPro.TextMeshProUGUI DialogueText => dialogueText;
 
-    [SerializeField] private List<BattleHUD> playerHUDs;
+    [SerializeReference] private List<BattleHUD> playerHUDs;
     [SerializeField] private List<BattleHUD> enemyHUDs;
 
     public List<BattleHUD> Player => playerHUDs;
