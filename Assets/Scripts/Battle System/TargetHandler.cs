@@ -7,30 +7,26 @@ public class TargetHandler : MonoBehaviour
 {
     //MAY NOT BE USEFUL AFTER ALL. REUSE FOR GENERATING BUTTONS
     [SerializeField] private BattleSystem BattleSystem;
-    [SerializeField] private Button button;
-    [SerializeField] private List<BattleHUD> _validAllyTargets;
-    [SerializeField] private List<BattleHUD> _validEnemyTargets;
-    public List<BattleHUD> ValidAllyTargets { get => _validAllyTargets; set => _validAllyTargets = value; }
-    public List<BattleHUD> ValidEnemyTargets { get => _validEnemyTargets; set => _validEnemyTargets = value; }
+    [SerializeField] private TargetUnit button;
+
+    public List<BattleHUD> ValidAllyTargets { get => BattleSystem.Player;}
+    public List<BattleHUD> ValidEnemyTargets { get => BattleSystem.Enemy;}
 
     private void Start()
     {
-        GenerateEnemyTargetButtons();
+        GenerateTargetButtons(ValidAllyTargets);
+        GenerateTargetButtons(ValidEnemyTargets);
     }
 
-    public void TargetsEnemies()
+    private void GenerateTargetButtons(List<BattleHUD> ValidTargets)
     {
-    }
-
-    public void TargetsAllies()
-    {
-    }
-
-    private void GenerateEnemyTargetButtons()
-    {
-        for(int i = 0; i < BattleSystem.Enemy.Count; i++)
+        for(int i = 0; i < ValidTargets.Count; i++)
         {
-            Instantiate(button, this.transform);
+            TargetUnit attackButton = Instantiate(button, this.transform);
+            attackButton.gameObject.SetActive(true);
+            attackButton.Target = ValidTargets[i];
+            attackButton.name = ValidTargets[i].Stats.CharInfo.Name;
+            attackButton.SetName(ValidTargets[i].Stats.CharInfo.Name);
         }
     }
 
