@@ -28,9 +28,9 @@ public class BattleSystem : BattleStateMachine
         SetState(new Begin(this));
     }
 
-    public void OnAttackButton()
+    public void OnAttackButton(BattleHUD target)
     {
-        StartCoroutine(BattleState.Attack());
+        StartCoroutine(BattleState.Attack(target));
     }
 
     public void OnHealButton()

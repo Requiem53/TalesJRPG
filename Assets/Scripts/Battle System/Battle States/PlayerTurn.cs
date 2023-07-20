@@ -13,17 +13,17 @@ internal class PlayerTurn : BattleState
         yield break;
     }
 
-    public override IEnumerator Attack()
+    public override IEnumerator Attack(BattleHUD target)
     {
-        bool isDead = BattleSystem.Enemy[0].Stats.TakeDamage(Battler.Damage);
+        target.Stats.TakeDamage(Battler.Damage);
+        
+        BattleSystem.SetDialogue(Battler.CharInfo.Name + " attacked " + target.Stats.CharInfo.Name + "!");
 
-        BattleSystem.SetDialogue(Battler.CharInfo.Name + " attacked " + BattleSystem.Enemy[0].Stats.CharInfo.Name + "!");
-
-        BattleSystem.Enemy[0].SetHUD();
+        target.SetHUD();
     
         yield return new WaitForSeconds(1f);
 
-        if(isDead)
+        if(IsDead())
         {
             BattleSystem.SetState(new Won(BattleSystem));
         }

@@ -10,12 +10,16 @@ public class TargetUnit : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI _buttonName;
 
     public BattleHUD Target { get => _target; set => _target = value; }
-    public string ButtonName { get => _buttonName.text; set => _buttonName.text = value; }
+    public Button Button { get => _button; set => _button = value; }
 
+    public void ReferenceComponents()
+    {
+        Button = this.GetComponent<Button>();
+        _buttonName = Button.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+    }
     public void SetName(string name)
     {
-        _button = this.GetComponent<Button>();
-        _buttonName = _button.GetComponentInChildren<TMPro.TextMeshProUGUI>();
         _buttonName.text = name;
     }
+
 }

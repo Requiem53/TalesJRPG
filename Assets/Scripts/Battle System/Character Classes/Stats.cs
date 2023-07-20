@@ -26,10 +26,9 @@ public class Stats : MonoBehaviour
     public int SetDamage { get => _damage; set => _damage = value;}
     public float SetSpeed { get => _speed; set => _speed = value;}
 
-    public bool TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         CharInfo.CurrentHealth = Math.Max(0, CharInfo.CurrentHealth - damage);
-        return CharInfo.CurrentHealth == 0;
     }
 
     public void Heal(int amount)

@@ -20,7 +20,7 @@ public abstract class BattleState
         yield break;
     }
 
-    public virtual IEnumerator Attack()
+    public virtual IEnumerator Attack(BattleHUD target)
     {
         yield break;
     }
@@ -55,6 +55,12 @@ public abstract class BattleState
         {
             return false;
         }
+    }
+
+    //Temporary
+    protected bool IsDead()
+    {
+        return false;
     }
 
     protected void ResetTurn()
