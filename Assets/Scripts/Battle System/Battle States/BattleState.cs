@@ -20,6 +20,11 @@ public abstract class BattleState
         yield break;
     }
 
+    public virtual IEnumerator CastSpell(Spells spell, BattleHUD target)
+    {
+        yield break;
+    }
+
     public virtual IEnumerator Attack(BattleHUD target)
     {
         yield break;

@@ -15,7 +15,7 @@ internal class EnemyTurn : BattleState
 
         BattleSystem.Player[target].Stats.TakeDamage(Battler.Damage);
 
-        BattleSystem.Player[target].SetHUD();
+        //BattleSystem.Player[target].SetHUD();
 
         yield return new WaitForSeconds(1f); 
 

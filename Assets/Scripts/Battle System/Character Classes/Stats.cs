@@ -26,6 +26,13 @@ public class Stats : MonoBehaviour
     public int SetDamage { get => _damage; set => _damage = value;}
     public float SetSpeed { get => _speed; set => _speed = value;}
 
+    [SerializeField] private List<Spells> spellList;
+    
+    public void CastSpell(Spells spell)
+    {
+        spell.Start();
+    }
+
     public void TakeDamage(int damage)
     {
         CharInfo.CurrentHealth = Math.Max(0, CharInfo.CurrentHealth - damage);

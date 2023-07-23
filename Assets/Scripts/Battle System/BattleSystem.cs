@@ -28,6 +28,11 @@ public class BattleSystem : BattleStateMachine
         SetState(new Begin(this));
     }
 
+    public void OnCastButton(Spells spell, BattleHUD target)
+    {
+        StartCoroutine(BattleState.CastSpell(spell, target));
+    }
+
     public void OnAttackButton(BattleHUD target)
     {
         StartCoroutine(BattleState.Attack(target));

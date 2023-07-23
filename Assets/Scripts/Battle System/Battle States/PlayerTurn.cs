@@ -13,6 +13,12 @@ internal class PlayerTurn : BattleState
         yield break;
     }
 
+    public override IEnumerator CastSpell(Spells spell, BattleHUD target)
+    {
+        Battler.CastSpell(spell);
+        yield break;
+    }
+
     public override IEnumerator Attack(BattleHUD target)
     {
         target.Stats.TakeDamage(Battler.Damage);

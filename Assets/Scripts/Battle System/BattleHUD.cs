@@ -12,6 +12,16 @@ public class BattleHUD : MonoBehaviour
 
     public Stats Stats { get => stats; set => stats = value; }
 
+    private void Start()
+    {
+        stats.CharInfo.OnStatsChange += SetHUD;
+    }
+
+    private void OnDisable()
+    {
+        stats.CharInfo.OnStatsChange -= SetHUD;
+    }
+
     public void SetHUD()
     {
         _nameText.text = Stats.CharInfo.Name;
