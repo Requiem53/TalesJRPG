@@ -6,6 +6,7 @@ using UnityEngine;
 public class Stats : MonoBehaviour
 {
     [SerializeField] private CharacterInfo _charInfo;
+    [SerializeField] private List<Spells> spellList;
 
     [SerializeField] private int _maxHealth;
     [SerializeField] private int _maxMana;
@@ -25,8 +26,6 @@ public class Stats : MonoBehaviour
     public int SetMaxMana { get => _maxMana; set => _maxMana = value; }
     public int SetDamage { get => _damage; set => _damage = value;}
     public float SetSpeed { get => _speed; set => _speed = value;}
-
-    [SerializeField] private List<Spells> spellList;
     
     public void CastSpell(Spells spell)
     {
@@ -48,7 +47,7 @@ public class Stats : MonoBehaviour
     }
 
 
-    private void Start()
+    private void Awake()
     {
         InitializeStats();
     }

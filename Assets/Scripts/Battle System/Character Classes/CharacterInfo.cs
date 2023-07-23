@@ -13,7 +13,7 @@ public class CharacterInfo : MonoBehaviour
 
     public event Action OnStatsChange;
 
-    private void Start()
+    private void Awake()
     {
         CharClass = this.GetComponent<CharacterClass>();
     }
@@ -66,10 +66,4 @@ public class CharacterInfo : MonoBehaviour
             OnStatsChange?.Invoke();
         }
     }
-
-    // public string Name { get => _name; set => _name = value; }
-    // public CharacterClass CharClass { get => _charClass; set => _charClass = value; }
-    // public int Level { get => _level; set => _level = value; }
-    // public int CurrentHealth { get => _currentHealth; set => _currentHealth = value; }
-    // public int CurrentMana { get => _currentMana; set => _currentMana = value; }
 }

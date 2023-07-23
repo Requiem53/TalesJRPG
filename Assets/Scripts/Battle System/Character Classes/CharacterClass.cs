@@ -13,12 +13,6 @@ public abstract class CharacterClass : MonoBehaviour
     [SerializeField] private int _wisdom;
     [SerializeField] private int _luck;
 
-    //FOR TWEAKING
-    [SerializeField] private float _strengthMult = 1.12f;
-    [SerializeField] private float _resilienceMult = 1.12f;
-    [SerializeField] private float _agilityMult = 1.12f;
-    [SerializeField] private float _wisdomMult = 1.12f;
-    [SerializeField] private float _luckMult = 1.12f;
 
     public string Class { get => _class; set => _class = value; }
     public int Strength { get => _strength; set => _strength = value; }
@@ -27,17 +21,17 @@ public abstract class CharacterClass : MonoBehaviour
     public int Wisdom { get => _wisdom; set => _wisdom = value; }
     public int Luck { get => _luck; set => _luck = value; }
 
-    void Start()
+    void Awake()
     {
         Stats = this.GetComponent<Stats>();
     }
 
     public virtual void StatsSetter()
     {
-        Stats.SetMaxHealth = (int)((float)Resilience * _resilienceMult);
-        Stats.SetMaxMana = (int)((float)Wisdom * _wisdomMult);
-        Stats.SetDamage = (int)((float)Strength * _strengthMult);
-        Stats.SetSpeed = (int)((float)Agility * _agilityMult);
+        Stats.SetMaxHealth = (int)((float)Resilience * StatsMultiplier.ResilienceMult);
+        Stats.SetMaxMana = (int)((float)Wisdom * StatsMultiplier.WisdomMult);
+        Stats.SetDamage = (int)((float)Strength * StatsMultiplier.StrengthMult);
+        Stats.SetSpeed = (int)((float)Agility * StatsMultiplier.AgilityMult);
     }
     public abstract void InitializeClass();
 

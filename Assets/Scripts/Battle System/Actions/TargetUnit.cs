@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class TargetUnit : MonoBehaviour
 {
-    [SerializeField] private BattleHUD _target;
+    [SerializeField] private Stats _target;
     [SerializeField] private Button _button;
     [SerializeField] private TMPro.TextMeshProUGUI _buttonName;
 
-    public BattleHUD Target { get => _target; set => _target = value; }
+    public Stats Target { get => _target; set => _target = value; }
     public Button Button { get => _button; set => _button = value; }
 
     public void ReferenceComponents()

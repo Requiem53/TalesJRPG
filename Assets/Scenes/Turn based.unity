@@ -207,7 +207,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1016438901}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AttackButtonComponents, Assembly-CSharp
         m_MethodName: DisplayAllies
         m_Mode: 1
@@ -1135,13 +1135,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleTurnOrder: {fileID: 472435367}
+  _players:
+  - {fileID: 5187210009456290272}
+  - {fileID: 1585091639}
+  _enemies:
+  - {fileID: 9187639972488026008}
+  - {fileID: 1176481322}
   dialogueText: {fileID: 1863470022}
-  playerHUDs:
-  - {fileID: 143536607}
-  - {fileID: 91922064}
-  enemyHUDs:
-  - {fileID: 825611320}
-  - {fileID: 1219366823}
   _playerBattleStation: {fileID: 1632835893}
   _enemyBattleStation: {fileID: 2100896306}
 --- !u!114 &472435367
@@ -1347,6 +1347,7 @@ MonoBehaviour:
   BattleSystem: {fileID: 472435366}
   button: {fileID: 4991754686669910795}
   forAllies: 0
+  _validTargets: []
 --- !u!114 &617023905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1456,7 +1457,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1016438901}
-        m_TargetAssemblyTypeName: AttackButtonComponents, Assembly-CSharp
+        m_TargetAssemblyTypeName: ActionSubMenu, Assembly-CSharp
         m_MethodName: DisplaySpells
         m_Mode: 1
         m_Arguments:
@@ -1705,6 +1706,7 @@ GameObject:
   - component: {fileID: 1016438899}
   - component: {fileID: 1016438900}
   - component: {fileID: 1016438901}
+  - component: {fileID: 1016438902}
   m_Layer: 5
   m_Name: Actions
   m_TagString: Untagged
@@ -1767,13 +1769,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1016438898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c190f752eae548e4ea724c8915b17778, type: 3}
+  m_Script: {fileID: 11500000, guid: 26632784bd56bdc4f8d723e01fbe8ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _options: []
   _allies: {fileID: 1149378232}
   _enemies: {fileID: 617023902}
   _spells: {fileID: 2097772125}
+--- !u!114 &1016438902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016438898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ddf8b5642c8ae44858b18fb1e6bf98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1040966257
 GameObject:
   m_ObjectHideFlags: 0
@@ -2121,6 +2135,7 @@ MonoBehaviour:
   BattleSystem: {fileID: 472435366}
   button: {fileID: 4991754686669910795}
   forAllies: 1
+  _validTargets: []
 --- !u!1 &1173959444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2315,11 +2330,6 @@ MonoBehaviour:
   _agility: 0
   _wisdom: 0
   _luck: 0
-  _strengthMult: 0.01
-  _resilienceMult: 1.12
-  _agilityMult: 1.12
-  _wisdomMult: 1.12
-  _luckMult: 1.12
 --- !u!114 &1176481322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2333,12 +2343,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charInfo: {fileID: 0}
+  spellList: []
   _maxHealth: 0
   _maxMana: 0
   _damage: 0
   _speed: 0
   _isPlayable: 0
-  spellList: []
 --- !u!114 &1176481323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2724,11 +2734,6 @@ MonoBehaviour:
   _agility: 0
   _wisdom: 0
   _luck: 0
-  _strengthMult: 0.01
-  _resilienceMult: 1.12
-  _agilityMult: 1.12
-  _wisdomMult: 1.12
-  _luckMult: 1.12
 --- !u!114 &1585091639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2742,12 +2747,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charInfo: {fileID: 0}
+  spellList: []
   _maxHealth: 0
   _maxMana: 0
   _damage: 0
   _speed: 0
   _isPlayable: 1
-  spellList: []
 --- !u!114 &1585091640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3361,8 +3366,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1016438901}
-        m_TargetAssemblyTypeName: AttackButtonComponents, Assembly-CSharp
+        m_TargetAssemblyTypeName: ActionSubMenu, Assembly-CSharp
         m_MethodName: DisplayEnemies
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ActionHandler, Assembly-CSharp
+        m_MethodName: MeleeAttackAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3816,7 +3833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1bce50a90897634291887324ff7665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 1219366823}
+  _target: {fileID: 0}
   _button: {fileID: 0}
   _buttonName: {fileID: 0}
 --- !u!114 &4991754686669910796
@@ -3974,12 +3991,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charInfo: {fileID: 0}
+  spellList: []
   _maxHealth: 0
   _maxMana: 0
   _damage: 0
   _speed: 0
   _isPlayable: 1
-  spellList: []
 --- !u!114 &5187210009456290273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3999,11 +4016,6 @@ MonoBehaviour:
   _agility: 0
   _wisdom: 0
   _luck: 0
-  _strengthMult: 0.01
-  _resilienceMult: 1.12
-  _agilityMult: 1.12
-  _wisdomMult: 1.12
-  _luckMult: 1.12
 --- !u!114 &5187210009456290275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4159,12 +4171,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charInfo: {fileID: 0}
+  spellList: []
   _maxHealth: 0
   _maxMana: 0
   _damage: 0
   _speed: 0
   _isPlayable: 0
-  spellList: []
 --- !u!114 &9187639972488026009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4184,11 +4196,6 @@ MonoBehaviour:
   _agility: 0
   _wisdom: 0
   _luck: 0
-  _strengthMult: 0.01
-  _resilienceMult: 1.12
-  _agilityMult: 1.12
-  _wisdomMult: 1.12
-  _luckMult: 1.12
 --- !u!114 &9187639972488026011
 MonoBehaviour:
   m_ObjectHideFlags: 0

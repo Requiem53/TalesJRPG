@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackButtonComponents : MonoBehaviour
+public class ActionSubMenu : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _options;
     [SerializeField] private GameObject _allies;
     [SerializeField] private GameObject _enemies;
     [SerializeField] private GameObject _spells;
-    
+
+    public void DisplayOff()
+    {
+        _allies.SetActive(false);
+        _enemies.SetActive(false);
+        _spells.SetActive(false);
+    }
 
     public void DisplayAllies()
     {
@@ -29,9 +35,5 @@ public class AttackButtonComponents : MonoBehaviour
         _spells.SetActive(true);
         _allies.SetActive(false);
         _enemies.SetActive(false);   
-    }
-    private void Display()
-    {
-        
     }
 }

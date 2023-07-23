@@ -13,19 +13,17 @@ internal class PlayerTurn : BattleState
         yield break;
     }
 
-    public override IEnumerator CastSpell(Spells spell, BattleHUD target)
+    public override IEnumerator CastSpell(Spells spell, Stats target)
     {
         Battler.CastSpell(spell);
         yield break;
     }
 
-    public override IEnumerator Attack(BattleHUD target)
+    public override IEnumerator Attack(Stats target)
     {
-        target.Stats.TakeDamage(Battler.Damage);
+        target.TakeDamage(Battler.Damage);
         
-        BattleSystem.SetDialogue(Battler.CharInfo.Name + " attacked " + target.Stats.CharInfo.Name + "!");
-
-        target.SetHUD();
+        BattleSystem.SetDialogue(Battler.CharInfo.Name + " attacked " + target.CharInfo.Name + "!");
     
         yield return new WaitForSeconds(1f);
 
@@ -45,7 +43,6 @@ internal class PlayerTurn : BattleState
         BattleSystem.SetDialogue(Battler.CharInfo.Name + " healed themselves!");
 
         //Change soon to be consistent with everything
-        BattlerHUD.SetHUD();
         yield return new WaitForSeconds(1f);
 
         NextTurn();

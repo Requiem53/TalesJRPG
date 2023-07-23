@@ -5,11 +5,11 @@ using UnityEngine;
 public class BattleTurnOrder : MonoBehaviour
 {
     [SerializeField] private BattleSystem _battleSystem;
-    [SerializeField] private List<BattleHUD> _turnOrder;
+    [SerializeField] private List<Stats> _turnOrder;
     [SerializeField] private int _turnNumber;
 
     public int TurnNumber { get => _turnNumber; set => _turnNumber = value; }
-    public List<BattleHUD> TurnOrder { get => _turnOrder; set => _turnOrder = value; }
+    public List<Stats> TurnOrder { get => _turnOrder; set => _turnOrder = value; }
     public BattleSystem BattleSystem { get => _battleSystem; set => _battleSystem = value; }
 
     private void Start()

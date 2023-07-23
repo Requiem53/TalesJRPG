@@ -12,20 +12,19 @@ public abstract class BattleState
 
     protected BattleTurnOrder BattleTurn{get => BattleSystem.Turn;}
     protected int TurnNumber{get => BattleSystem.Turn.TurnNumber;}
-    protected BattleHUD BattlerHUD{get => BattleSystem.Turn.TurnOrder[TurnNumber];}
-    protected Stats Battler{get => BattlerHUD.Stats;}
+    protected Stats Battler{get => BattleSystem.Turn.TurnOrder[TurnNumber];}
 
     public virtual IEnumerator Start()
     {
         yield break;
     }
 
-    public virtual IEnumerator CastSpell(Spells spell, BattleHUD target)
+    public virtual IEnumerator CastSpell(Spells spell, Stats target)
     {
         yield break;
     }
 
-    public virtual IEnumerator Attack(BattleHUD target)
+    public virtual IEnumerator Attack(Stats target)
     {
         yield break;
     }

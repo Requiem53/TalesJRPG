@@ -11,11 +11,8 @@ internal class EnemyTurn : BattleState
     {
         int target = Random.Range(0, BattleSystem.Player.Count);
         //This be temporary fixes
-        BattleSystem.SetDialogue(Battler.CharInfo.Name + " attacks " + BattleSystem.Player[target].Stats.CharInfo.Name + "!");
-
-        BattleSystem.Player[target].Stats.TakeDamage(Battler.Damage);
-
-        //BattleSystem.Player[target].SetHUD();
+        BattleSystem.SetDialogue(Battler.CharInfo.Name + " attacks " + BattleSystem.Player[target].CharInfo.Name + "!");
+        BattleSystem.Player[target].TakeDamage(Battler.Damage);
 
         yield return new WaitForSeconds(1f); 
 

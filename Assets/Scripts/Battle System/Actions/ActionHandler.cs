@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class ActionHandler : MonoBehaviour
 {
+
+    public void MeleeAttackAction()
+    {
+
+    }
     
 }

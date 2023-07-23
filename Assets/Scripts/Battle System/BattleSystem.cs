@@ -6,21 +6,16 @@ using UnityEngine.UI;
 public class BattleSystem : BattleStateMachine
 {
     [SerializeField] private BattleTurnOrder battleTurnOrder;
+    [SerializeField] private List<Stats> _players;
+    [SerializeField] private List<Stats> _enemies;
     [SerializeField] private TMPro.TextMeshProUGUI dialogueText;
-
-    public TMPro.TextMeshProUGUI DialogueText => dialogueText;
-
-    [SerializeField] private List<BattleHUD> playerHUDs;
-    [SerializeField] private List<BattleHUD> enemyHUDs;
-
-    public List<BattleHUD> Player => playerHUDs;
-    public List<BattleHUD> Enemy => enemyHUDs;
-
-    public BattleTurnOrder Turn { get => battleTurnOrder; set => battleTurnOrder = value; }
-
     [SerializeField] private Transform _playerBattleStation;
     [SerializeField] private Transform _enemyBattleStation;
 
+    public BattleTurnOrder Turn { get => battleTurnOrder; set => battleTurnOrder = value; }
+    public List<Stats> Player => _players;
+    public List<Stats> Enemy => _enemies;
+    public TMPro.TextMeshProUGUI DialogueText => dialogueText;
 
     private void Start()
     {
@@ -28,12 +23,12 @@ public class BattleSystem : BattleStateMachine
         SetState(new Begin(this));
     }
 
-    public void OnCastButton(Spells spell, BattleHUD target)
+    public void OnCastButton(Spells spell, Stats target)
     {
         StartCoroutine(BattleState.CastSpell(spell, target));
     }
 
-    public void OnAttackButton(BattleHUD target)
+    public void OnAttackButton(Stats target)
     {
         StartCoroutine(BattleState.Attack(target));
     }
@@ -56,6 +51,5 @@ public class BattleSystem : BattleStateMachine
 
     public BattleTurnOrder BattleTurn{get => this.Turn;}
     public int TurnNumber{get => this.Turn.TurnNumber;}
-    public BattleHUD BattlerHUD{get => this.Turn.TurnOrder[TurnNumber];}
-    public Stats Battler{get => BattlerHUD.Stats;}
+    public Stats Battler{get => this.Turn.TurnOrder[TurnNumber];}
 }

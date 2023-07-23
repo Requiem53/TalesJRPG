@@ -12,7 +12,7 @@ public class BattleHUD : MonoBehaviour
 
     public Stats Stats { get => stats; set => stats = value; }
 
-    private void Start()
+    private void OnEnable()
     {
         stats.CharInfo.OnStatsChange += SetHUD;
     }
@@ -20,6 +20,11 @@ public class BattleHUD : MonoBehaviour
     private void OnDisable()
     {
         stats.CharInfo.OnStatsChange -= SetHUD;
+    }
+
+    private void Start()
+    {
+        SetHUD();
     }
 
     public void SetHUD()
