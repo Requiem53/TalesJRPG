@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,8 +22,10 @@ public class BattleSystem : BattleStateMachine
         SummonCharacters();
         SetState(new Begin(this));
     }
+
     public void OnMeleeAttackButton(Stats target)
     {
+        Debug.Log("Current State: " + BattleState);
         StartCoroutine(BattleState.Attack(target));
     }
 

@@ -4,5 +4,12 @@ using UnityEngine;
 
 public interface Actions 
 {
-    public abstract void Start();
+    public virtual void Start()
+    {
+
+    }
+    public virtual void StartTarget(Stats target)
+    {
+
+    }
 }

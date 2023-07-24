@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,16 +6,15 @@ using UnityEngine.UI;
 
 public class TargetHandler : MonoBehaviour
 {
-    //MAY NOT BE USEFUL AFTER ALL. REUSE FOR GENERATING BUTTONS
     [SerializeField] private BattleSystem BattleSystem;
     [SerializeField] private TargetUnit button;
 
     [SerializeField] private bool forAllies;
-    [SerializeField] private List<Button> _validTargets;
+    [SerializeField] private List<TargetUnit> _validTargets;
 
     public List<Stats> ValidAllyTargets { get => BattleSystem.Player;}
     public List<Stats> ValidEnemyTargets { get => BattleSystem.Enemy;}
-    public List<Button> ValidTargets { get => _validTargets; set => _validTargets = value; }
+    public List<TargetUnit> ValidTargets { get => _validTargets; set => _validTargets = value; }
 
     private void Start()
     {
@@ -39,22 +39,47 @@ public class TargetHandler : MonoBehaviour
     private void GenerateButton(Stats validTarget)
     {
         TargetUnit actionInput = Instantiate(button, this.transform);
-        actionInput.gameObject.SetActive(true);
+        actionInput.gameObject.SetActive(false);
         actionInput.Target = validTarget;
         actionInput.name = validTarget.CharInfo.Name;
         actionInput.ReferenceComponents();
         actionInput.SetName(validTarget.CharInfo.Name);
-
-        ValidTargets.Add(actionInput.Button);
+        actionInput.Button.onClick.AddListener(actionInput.ExecuteAction);
+        if(forAllies)
+        {
+            actionInput.Selection = BattleSelect.Allies;
+        }
+        else
+        {
+            actionInput.Selection = BattleSelect.Enemies;
+        }
+        ValidTargets.Add(actionInput);
         //Change so it depends on what type of listener its supposed to have?
         // attackButton.Button.onClick.AddListener(() => BattleSystem.OnAttackButton(attackButton.Target));
     }
 
-    private void SetAction(List<Button> ValidTargets)
+    private void OnEnable()
+    {
+        ActionSubMenu.OnTargetsOn += EnableButton;
+    }
+
+    private void OnDisable()
+    {
+        ActionSubMenu.OnTargetsOn -= EnableButton;   
+    }
+
+    private void EnableButton(BattleSelect selection)
     {
         for(int i = 0; i < ValidTargets.Count; i++)
         {
-
+            if(ValidTargets[i].Selection == selection)
+            {
+                ValidTargets[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                ValidTargets[i].gameObject.SetActive(false);    
+            }
         }
     }
 

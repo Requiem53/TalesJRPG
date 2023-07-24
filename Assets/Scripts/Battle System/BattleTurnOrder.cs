@@ -11,6 +11,7 @@ public class BattleTurnOrder : MonoBehaviour
     public int TurnNumber { get => _turnNumber; set => _turnNumber = value; }
     public List<Stats> TurnOrder { get => _turnOrder; set => _turnOrder = value; }
     public BattleSystem BattleSystem { get => _battleSystem; set => _battleSystem = value; }
+    public Stats Battler{get => TurnOrder[TurnNumber];}
 
     private void Start()
     {

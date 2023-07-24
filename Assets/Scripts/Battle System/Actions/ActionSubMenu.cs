@@ -1,39 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BattleSelect
+{
+    Allies,
+    Enemies,
+    Spells
+}
 public class ActionSubMenu : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _options;
-    [SerializeField] private GameObject _allies;
-    [SerializeField] private GameObject _enemies;
-    [SerializeField] private GameObject _spells;
+    public static event Action<BattleSelect> OnTargetsOn;
 
     public void DisplayOff()
     {
-        _allies.SetActive(false);
-        _enemies.SetActive(false);
-        _spells.SetActive(false);
+        
     }
 
     public void DisplayAllies()
     {
-        _allies.SetActive(true);
-        _enemies.SetActive(false);
-        _spells.SetActive(false);
+        OnTargetsOn?.Invoke(BattleSelect.Allies);
     }
 
     public void DisplayEnemies()
     {
-        _enemies.SetActive(true);
-        _allies.SetActive(false);
-        _spells.SetActive(false);
+        OnTargetsOn?.Invoke(BattleSelect.Enemies);
     }
 
     public void DisplaySpells()
     {
-        _spells.SetActive(true);
-        _allies.SetActive(false);
-        _enemies.SetActive(false);   
+
     }
 }

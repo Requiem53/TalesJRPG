@@ -1311,7 +1311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &617023903
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1772,10 +1772,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26632784bd56bdc4f8d723e01fbe8ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _options: []
-  _allies: {fileID: 1149378232}
-  _enemies: {fileID: 617023902}
-  _spells: {fileID: 2097772125}
 --- !u!114 &1016438902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1788,6 +1784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34ddf8b5642c8ae44858b18fb1e6bf98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BattleSystem: {fileID: 472435366}
 --- !u!1 &1040966257
 GameObject:
   m_ObjectHideFlags: 0
@@ -2075,7 +2072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1149378233
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3377,9 +3374,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1016438902}
         m_TargetAssemblyTypeName: ActionHandler, Assembly-CSharp
-        m_MethodName: MeleeAttackAction
+        m_MethodName: MeleeAttack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3836,6 +3833,7 @@ MonoBehaviour:
   _target: {fileID: 0}
   _button: {fileID: 0}
   _buttonName: {fileID: 0}
+  selection: 0
 --- !u!114 &4991754686669910796
 MonoBehaviour:
   m_ObjectHideFlags: 0

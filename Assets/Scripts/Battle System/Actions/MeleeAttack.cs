@@ -1,23 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeAttack : Actions
 {
-    public void Start()
+    protected BattleSystem BattleSystem;
+
+    public MeleeAttack(BattleSystem battleSystem)
     {
-        MeleeStrike(Target);
+        BattleSystem = battleSystem;
     }
 
-    protected Stats Target;
-
-    public MeleeAttack(Stats target)
+    public void StartTarget(Stats target)
     {
-        Target = target;
-    }
-
-    public void MeleeStrike(Stats target)
-    {
-        //target.TakeDamage();
+        BattleSystem.OnMeleeAttackButton(target);
     }
 }

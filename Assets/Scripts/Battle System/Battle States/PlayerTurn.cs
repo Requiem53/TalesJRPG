@@ -22,7 +22,6 @@ internal class PlayerTurn : BattleState
     public override IEnumerator Attack(Stats target)
     {
         target.TakeDamage(Battler.Damage);
-        
         BattleSystem.SetDialogue(Battler.CharInfo.Name + " attacked " + target.CharInfo.Name + "!");
     
         yield return new WaitForSeconds(1f);
