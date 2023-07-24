@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ActionHandler : MonoBehaviour
 {
-
-    public void MeleeAttackAction()
+    [SerializeField] private BattleSystem battleSystem;
+    public static event Action<Actions> OnActionDecide;
+    public void MeleeAttack()
     {
-
+        //OnActionDecide?.Invoke(new MeleeAttack());
     }
     
 }

@@ -50,4 +50,12 @@ public class TargetHandler : MonoBehaviour
         // attackButton.Button.onClick.AddListener(() => BattleSystem.OnAttackButton(attackButton.Target));
     }
 
+    private void SetAction(List<Button> ValidTargets)
+    {
+        for(int i = 0; i < ValidTargets.Count; i++)
+        {
+
+        }
+    }
+
 }

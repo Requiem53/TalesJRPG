@@ -22,6 +22,10 @@ public class BattleSystem : BattleStateMachine
         SummonCharacters();
         SetState(new Begin(this));
     }
+    public void OnMeleeAttackButton(Stats target)
+    {
+        StartCoroutine(BattleState.Attack(target));
+    }
 
     public void OnCastButton(Spells spell, Stats target)
     {
