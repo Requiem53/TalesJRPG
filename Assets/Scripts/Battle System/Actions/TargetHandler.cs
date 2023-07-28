@@ -32,11 +32,11 @@ public class TargetHandler : MonoBehaviour
     {
         for(int i = 0; i < ValidTargets.Count; i++)
         {
-            GenerateButton(ValidTargets[i]);
+            GenerateTargetUnitButton(ValidTargets[i]);
         }
     }
 
-    private void GenerateButton(Stats validTarget)
+    private void GenerateTargetUnitButton(Stats validTarget)
     {
         TargetUnit actionInput = Instantiate(button, this.transform);
         actionInput.gameObject.SetActive(false);

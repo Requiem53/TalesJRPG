@@ -6,8 +6,9 @@ using UnityEngine;
 public class HealingSpells : Spells
 {
     [SerializeField] private int _healAmount;
-
+    private BattleSelect targetUnit = BattleSelect.Allies;
     protected Stats Target;
+    
     public HealingSpells(Stats target)
     {
         Target = target;

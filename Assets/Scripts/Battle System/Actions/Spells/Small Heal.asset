@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd42df3df28e2d489693244fae9e35d, type: 3}
   m_Name: Small Heal
   m_EditorClassIdentifier: 
+  _name: Small Heal
   _manaCost: 10
   _healAmount: 20

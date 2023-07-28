@@ -16,13 +16,14 @@ public class BattleSystem : BattleStateMachine
     public List<Stats> Player => _players;
     public List<Stats> Enemy => _enemies;
     public TMPro.TextMeshProUGUI DialogueText => dialogueText;
+    public Stats CurrentBattler {get => Turn.Battler;}
 
     private void Start()
     {
         SummonCharacters();
         SetState(new Begin(this));
     }
-
+    
     public void OnMeleeAttackButton(Stats target)
     {
         Debug.Log("Current State: " + BattleState);

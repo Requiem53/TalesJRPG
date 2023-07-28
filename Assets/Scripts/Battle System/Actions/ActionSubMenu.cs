@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum BattleSelect
 {
+    Off,
     Allies,
     Enemies,
     Spells
@@ -15,7 +16,7 @@ public class ActionSubMenu : MonoBehaviour
 
     public void DisplayOff()
     {
-        
+        OnTargetsOn?.Invoke(BattleSelect.Off);
     }
 
     public void DisplayAllies()
@@ -30,6 +31,6 @@ public class ActionSubMenu : MonoBehaviour
 
     public void DisplaySpells()
     {
-
+        OnTargetsOn?.Invoke(BattleSelect.Spells);
     }
 }
